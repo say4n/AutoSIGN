@@ -1,0 +1,16 @@
+1 
+	Section 2 
+		Make a cell With the actual Model
+		MAke a cell with all the Inception Module and Siamese Network Explanation
+		Make changes in the Architechture if needed
+		Download Corresponding Weights / Train The Network
+
+2 
+	Section 3 
+		Make corresponding utils Functions
+		Update Images folder with Signature Examples
+		Run Model To Detect Signatures
+
+3 
+	Section #
+		Make a new Section for the New Tesseract Stuff
