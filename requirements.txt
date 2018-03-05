@@ -1,3 +1,4 @@
+flask
 matplotlib==2.1.2
 numpy==1.14.1
 scikit-learn==0.19.0

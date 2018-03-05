@@ -1,11 +1,28 @@
-from flask import Flask
-from flask import render_template
+import os
+from flask import Flask, flash, request, redirect, url_for, render_template
+from werkzeug.utils import secure_filename
+
+
+UPLOAD_FOLDER = '/tmp'
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
+
 
 app = Flask(__name__)
+app.secret_key = "super secret key"
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+# limit maximum allowed payload to 16 megabytes
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+
 
 @app.route("/")
 def index():
-    return "Hello World!"
+    return render_template("index.html")
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 @app.route("/verify", methods=["POST"])
 def verify():
@@ -13,19 +30,29 @@ def verify():
     accepts POST of json data
 
     data = {
-        "link_to_uploaded_signature" : url
-        "uid_of_customer" : uid
+        "signature_image" : image
+        "uuid" : uuid
     }
     """
-
     if request.method == "POST":
-        url = request.form.get("link_to_uploaded_signature")
-        uid = request.form.get("uid_of_customer")
+        # check if the post request has the file part
+        if 'signature_image' not in request.files:
+            flash(u'No file was uploaded, please try again!', 'error')
+            return redirect("/")
+
+        uuid = request.form.get('uuid')
+        file = request.files['signature_image']
+        # if user does not select file, browser also
+        # submit a empty part without filename
+        if file.filename == '':
+            flash(u'Empty image uploaded, please try again!', 'error')
+            return redirect("/")
         
-        if urlparse(url).scheme in ["http", "https"]:
-            
-        else:
-            abort(400)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+            return f"Uploaded {filename}"
 
 
 if __name__ == "__main__":

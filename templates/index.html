@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>!Not Boring</title>
+  <meta name="description" content="We are !Not Boring">
+  <meta name="author" content="Sayan Goswami, Ayan Sinha Mahapatra, Arpan Bhowmick, Dibyadip Chatterjee">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+  <!-- JS 
+  —————————————————————————————————————————————————— -->
+  <!-- <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script> -->
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/a4b.png') }}">
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="u-full-width page">
+      
+      <div class="row">
+        <h1>
+          <span class="u-pull-left">
+            <b class="sbi">SBI</b> A4B
+          </span>
+          <span class="u-pull-right">
+            <b>!Not Boring</b>
+          </span>
+        </h1>
+      </div>
+
+      <div class="row">
+        <form action="/verify" method="post" enctype="multipart/form-data">
+          
+          <div class="row">
+            
+            <div class="twelve columns">
+              <label for="userID">Unique User ID</label>
+              <input type="text" placeholder="XXXXXXXXX" id="userID" name="uuid">
+            </div>
+            
+            <div class="twelve columns">
+              <label for="signatureInput">Signature Image</label>
+              <input type="file" id="signatureInput" name="signature_image">
+            </div>
+
+          </div>
+
+          <div class="row">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                <ul class="flashes">
+                {% for category, message in messages %}
+                  <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
+          </div>
+
+          <input class="button-primary" type="submit" value="Submit">
+        
+        </form>
+
+
+      </div>
+      
+
+    </div>
+  </div>
+
+  <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
