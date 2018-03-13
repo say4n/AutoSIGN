@@ -1,5 +1,13 @@
 .sbi {
-    color: rgb(68,117,225);
+    color: rgb(68, 117, 225);
+}
+
+.auto_sign {
+    color:  rgb(96, 170, 77);
+}
+
+.not_boring {
+    font-size: 2.4rem;
 }
 
 .flashes {
