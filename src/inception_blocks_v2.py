@@ -209,7 +209,7 @@ def inception_block_3b(X):
 
     return inception
 
-def faceRecoModel(input_shape):
+def AutoSIGNModel(input_shape):
     """
     Implementation of the Inception model used for FaceNet
     
@@ -274,6 +274,6 @@ def faceRecoModel(input_shape):
     X = Lambda(lambda  x: K.l2_normalize(x,axis=1))(X)
 
     # Create model instance
-    model = Model(inputs = X_input, outputs = X, name='FaceRecoModel')
+    model = Model(inputs = X_input, outputs = X, name='AutoSIGNModel')
         
     return model
