@@ -41,16 +41,22 @@ def verify():
             return redirect("/")
 
         uuid = request.form.get('uuid')
+
         file = request.files['signature_image']
+        gt_file = request.files['signature_gt_image']
+
         # if user does not select file, browser also
         # submit a empty part without filename
-        if file.filename == '':
+        if file.filename == '' or gt_file.filename == '':
             flash(u'Empty image uploaded, please try again!', 'error')
             return redirect("/")
         
-        if file and allowed_file(file.filename):
+        if file and allowed_file(file.filename) and gt_file and allowed_file(gt_file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+            gt_filename = secure_filename(gt_file.filename)
+            gt_file.save(os.path.join(app.config['UPLOAD_FOLDER'], gt_filename))
 
             return f"Uploaded {filename}"
 

@@ -29,6 +29,7 @@
     src="https://code.jquery.com/jquery-3.2.1.min.js"
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
     crossorigin="anonymous"></script> -->
+  <script src="{{ url_for('static', filename='js/dropzone.js') }}" type="text/javascript" charset="utf-8" async defer></script>
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -68,10 +69,19 @@
               <label for="userID">Unique User ID</label>
               <input type="text" placeholder="XXXXXXXXX" id="userID" name="uuid">
             </div>
+
+            <div class="row">
             
-            <div class="twelve columns">
-              <label for="signatureInput">Signature Image</label>
-              <input type="file" id="signatureInput" name="signature_image">
+              <div class="six columns">
+                <label for="signatureInput">Signature Image</label>
+                <input type="file" id="signatureInput" name="signature_image">
+              </div>
+
+              <div class="six columns">
+                <label for="signatureGroundTruth">Signature Ground Truth</label>
+                <input type="file" id="signatureGroundTruth" name="signature_gt_image">
+              </div>
+
             </div>
 
           </div>
