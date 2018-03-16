@@ -58,7 +58,7 @@ def verify():
             gt_filename = secure_filename(gt_file.filename)
             gt_file.save(os.path.join(app.config['UPLOAD_FOLDER'], gt_filename))
 
-            return f"Uploaded {filename}"
+            return filename
 
 
 if __name__ == "__main__":
