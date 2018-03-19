@@ -13,6 +13,8 @@ scipy = "0.18.0"
 pillow = "3.0.0"
 Theano = "0.9"
 Lasagne = "*"
+gunicorn = "*"
+eventlet = "*"
 
 
 [dev-packages]
