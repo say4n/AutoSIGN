@@ -2,16 +2,15 @@ import os
 from flask import Flask, flash, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
 
-# Process_Folder
+# # Process_Folder
 
-from scipy.misc import imread
-from preprocess.normalize import preprocess_signature
-import signet
-from cnn_model import CNNModel
-import numpy as np
-import sys
-import os
-import scipy.io
+# from scipy.misc import imread
+# from preprocess.normalize import preprocess_signature
+# import signet
+# from cnn_model import CNNModel
+# import numpy as np
+# import sys
+# import scipy.io
 
 
 UPLOAD_FOLDER = '.'
@@ -107,9 +106,9 @@ def verify():
             fp2 = os.path.join(app.config['UPLOAD_FOLDER'], gt_filename)
             gt_file.save(fp2)
 
-            result = compare_signatures(fp1, fp2)
+            # result = compare_signatures(fp1, fp2)
 
-            return render_template("result.html", dist=result)
+            return render_template("result.html", dist=100)
 
 
 if __name__ == "__main__":
