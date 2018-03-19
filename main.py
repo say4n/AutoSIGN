@@ -47,7 +47,7 @@ def compare_signatures(path1,path2):
     feature_vector2 = feature_vector2.T 
 
     dist = (abs(feature_vector1**2 - feature_vector2**2))**(0.5)
-    print(dist)
+    #print(dist)
 
     for idx, val in enumerate(dist):
         # print(val.shape)
@@ -55,7 +55,7 @@ def compare_signatures(path1,path2):
             dist[idx] = 0
 
     dist = np.sum(dist)
-    print(dist)
+    #print(dist)
 
     return dist
 
