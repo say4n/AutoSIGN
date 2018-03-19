@@ -7,8 +7,8 @@ A Signature Validation and Mandate Verification System by using Siamese Networks
 
 The code is written in Python 2. We recommend using the Anaconda python distribution, and create a new environment using: 
 ```
-conda create -n sigver -y python=2
-source activate sigver
+conda create -n AutoSIGN -y python=2
+source activate AutoSIGN
 ```
 
 The following libraries are required
@@ -52,6 +52,8 @@ Then launch a shell with `pipenv shell`.
 To run locally, type in `python -B main.py`.
 
 ## Test
+
+Run ```python example.py```. This script pre-process a signature, and compares the feature vector obtained by the model to the results obtained previously. 
 
 Visit https://auto-sign.herokuapp.com !
 
