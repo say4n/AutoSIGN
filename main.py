@@ -13,7 +13,7 @@ import os
 import scipy.io
 
 
-UPLOAD_FOLDER = 'tmp'
+UPLOAD_FOLDER = '.'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
 THRESHOLD = 10
@@ -112,5 +112,5 @@ def verify():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
 
