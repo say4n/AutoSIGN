@@ -8,6 +8,10 @@ Then launch a shell with `pipenv shell`.
 
 To run locally, type in `python -B main.py`.
 
+## test
+
+Visit https://auto-sign.herokuapp.com !
+
 ## deploy
 
 Deployment instructions coming soon...
