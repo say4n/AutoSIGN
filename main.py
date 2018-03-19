@@ -3,6 +3,7 @@ from flask import Flask, flash, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
 
 # Process_Folder
+
 from scipy.misc import imread
 from preprocess.normalize import preprocess_signature
 import signet
