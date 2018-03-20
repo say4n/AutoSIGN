@@ -10,6 +10,7 @@ ENV LD_LIBRARY_PATH /app/.heroku/vendor/lib/
 
 RUN apt-get update && apt-get install -y apt-utils 
 RUN apt-get update && apt-get install -y gcc 
+# RUN apt-get update && apt-get install -y g++
 RUN apt-get update && apt-get install -y make 
 RUN apt-get update && apt-get install -y cmake 
 WORKDIR /app/.heroku
@@ -25,8 +26,8 @@ RUN rm get-pip.py
 RUN pip install flask
 
 RUN conda install -y opencv scipy=0.18.0 pillow=3.0.0
-RUN pip install Theano==0.9
-RUN pip install Lasagne
+RUN pip install --upgrade https://github.com/Theano/Theano/archive/master.zip
+RUN pip install --upgrade https://github.com/Lasagne/Lasagne/archive/master.zip
 RUN pip install opencv-python
 
 RUN pip install gunicorn
