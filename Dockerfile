@@ -26,15 +26,16 @@ RUN rm get-pip.py
 RUN pip install flask
 
 RUN conda install -y opencv scipy=0.18.0 pillow=3.0.0
-RUN pip install --upgrade https://github.com/Theano/Theano/archive/master.zip
-RUN pip install --upgrade https://github.com/Lasagne/Lasagne/archive/master.zip
-RUN pip install opencv-python
+RUN pip install Theano
+RUN pip install https://github.com/Lasagne/Lasagne/archive/master.zip
+# RUN pip install opencv-python
 
 RUN pip install gunicorn
 RUN pip install eventlet
 
 
-# Create vendor package
 WORKDIR /app/
 ADD . /app/
+
+
 CMD gunicorn --worker-class eventlet -w 1 main:app
