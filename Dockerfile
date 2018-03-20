@@ -35,4 +35,5 @@ RUN pip install eventlet
 
 # Create vendor package
 WORKDIR /app/
+ADD . /app/
 CMD gunicorn --worker-class eventlet -w 1 main:app
