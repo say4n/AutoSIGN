@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y gcc
 # RUN apt-get update && apt-get install -y g++
 RUN apt-get update && apt-get install -y make 
 RUN apt-get update && apt-get install -y cmake 
+RUN apt-get update && apt-get install -y libopenblas-dev
 WORKDIR /app/.heroku
 
 
