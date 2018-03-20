@@ -30,6 +30,7 @@ RUN conda install -y opencv scipy=0.18.0 pillow=3.0.0
 RUN pip install Theano
 RUN pip install https://github.com/Lasagne/Lasagne/archive/master.zip
 # RUN pip install opencv-python
+RUN pip install tensorflow
 
 RUN pip install gunicorn
 RUN pip install eventlet

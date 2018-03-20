@@ -1,13 +1,18 @@
 import os
 from flask import Flask, flash, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
+import tensorflow as tf
 
 # # Process_Folder
 
 from scipy.misc import imread
 from preprocess.normalize import preprocess_signature
-import signet
-from cnn_model import CNNModel
+
+#import signet
+import tf_signet
+#from cnn_model import CNNModel
+from tf_cnn_model import TF_CNNModel
+
 import numpy as np
 import sys
 import scipy.io
@@ -33,7 +38,11 @@ def compare_signatures(path1,path2):
 
     # Load the model
     model_weight_path = 'models/signet.pkl'
-    model = CNNModel(signet, model_weight_path)
+    #model = TF_CNNModel(signet, model_weight_path)
+    model = TF_CNNModel(tf_signet, model_weight_path)
+
+    sess = tf.Session()
+    sess.run(tf.global_variables_initializer())
 
     original1 = imread(path1, flatten=1)
     processed1 = preprocess_signature(original1, canvas_size)
@@ -41,8 +50,8 @@ def compare_signatures(path1,path2):
     original2 = imread(path2, flatten=1)
     processed2 = preprocess_signature(original2, canvas_size)
 
-    feature_vector1 = model.get_feature_vector(processed1)
-    feature_vector2 = model.get_feature_vector(processed2) 
+    feature_vector1 = model.get_feature_vector(sess,processed1)
+    feature_vector2 = model.get_feature_vector(sess,processed2) 
     feature_vector1 = feature_vector1.T
     feature_vector2 = feature_vector2.T 
 
