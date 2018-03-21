@@ -10,7 +10,6 @@ ENV LD_LIBRARY_PATH /app/.heroku/vendor/lib/
 
 RUN apt-get update && apt-get install -y apt-utils 
 RUN apt-get update && apt-get install -y gcc 
-# RUN apt-get update && apt-get install -y g++
 RUN apt-get update && apt-get install -y make 
 RUN apt-get update && apt-get install -y cmake 
 RUN apt-get update && apt-get install -y libopenblas-dev
@@ -29,7 +28,6 @@ RUN pip install flask
 RUN conda install -y opencv scipy=0.18.0 pillow=3.0.0
 RUN pip install Theano
 RUN pip install https://github.com/Lasagne/Lasagne/archive/master.zip
-# RUN pip install opencv-python
 RUN pip install tensorflow
 
 RUN pip install gunicorn
@@ -39,5 +37,6 @@ RUN pip install eventlet
 WORKDIR /app/
 ADD . /app/
 
+EXPOSE 8000
 
-CMD gunicorn --worker-class eventlet -w 1 main:app
+CMD ["gunicorn", "--worker-class", "eventlet", "-w", "1", "main:app"]
