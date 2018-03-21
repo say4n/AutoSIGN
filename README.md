@@ -54,7 +54,7 @@ To run locally, type in `python -B main.py`.
 
 ## Test
 
-Run `python_example.py`. This script pre-process a signature, and compares the feature vector obtained by the model to the results obtained previously. 
+Run `tf_example.py`. This script pre-process a signature, and compares the feature vector obtained by the model to the results obtained previously. 
 
 Visit https://auto-sign.herokuapp.com !
 
