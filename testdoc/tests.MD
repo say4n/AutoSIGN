@@ -1,3 +1,4 @@
-# tests
+# unittests
 
-Unit test to be added soon
+- `test_index` : Tests if index loads with 200 status code
+- 

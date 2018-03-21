@@ -16,8 +16,9 @@ The following libraries are required
 * Scipy version 0.18
 * Pillow version 3.0.0
 * OpenCV
-* Theano*
-* Lasagne*
+* Theano
+* Lasagne
+* Tensorflow
 * Flask
 
 They can be installed by running the following commands: 
@@ -53,13 +54,13 @@ To run locally, type in `python -B main.py`.
 
 ## Test
 
-Run ```python example.py```. This script pre-process a signature, and compares the feature vector obtained by the model to the results obtained previously. 
+Run `python_example.py`. This script pre-process a signature, and compares the feature vector obtained by the model to the results obtained previously. 
 
 Visit https://auto-sign.herokuapp.com !
 
 ## Deploy
 
-Deployment instructions coming soon...
+Deploy using the provided Dockerfile!
 
 ## Team
 
