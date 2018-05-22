@@ -1,4 +1,4 @@
-# AutoSIGN
+# AutoSIGN - Proof of Concept
 A Signature Validation and Mandate Verification System by using Siamese Networks and One-Shot Learning. 
 
 # Installation
