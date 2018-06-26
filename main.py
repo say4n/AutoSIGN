@@ -158,8 +158,12 @@ def verify():
             print("type(signatureB): ", type(signatureB))
             print("type(security_lvl): ", type(security_lvl))
 
-        return render_template("result.html", dist=dist)
-
+        return render_template("result.html",
+                               dist=dist,
+                               decision=bool(decision),
+                               same_percent=same_percent,
+                               forg_percent=forg_percent,
+                               diff_percent=diff_percent)
 
 
 if __name__ == "__main__":

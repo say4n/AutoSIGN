@@ -99,7 +99,36 @@ limitations under the License
         <main class="mdl-layout__content mdl-color--grey-100">
             <div class="mdl-grid">
                 <div class="mdl-cell mdl-cell--8-col">
-                    <h1>Distance: {{ dist }}</h1>
+                    {% if decision %}
+                        <h3>Signature matches.</h3>
+                    {% else %}
+                        <h3>Signature doesn't match.</h3>
+                    {% endif %}
+
+                    <div class="mdl-cell mdl-cell--8-col">
+                        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                            <thead>
+                                <tr>
+                                    <th class="mdl-data-table__cell--non-numeric">Metric</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="mdl-data-table__cell--non-numeric">Same Person</td>
+                                    <td>{{ same_percent }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="mdl-data-table__cell--non-numeric">Forgery</td>
+                                    <td>{{ forg_percent }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="mdl-data-table__cell--non-numeric">Different Person</td>
+                                    <td>{{ diff_percent }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </main>
