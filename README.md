@@ -30,6 +30,8 @@ pip install "Theano==0.9"
 pip install https://github.com/Lasagne/Lasagne/archive/master.zip
 pip install opencv-python
 pip install flask
+sudo apt-get update && sudo apt-get install libgtk2.0-dev
+sudo apt update && sudo apt install -y libsm6 libxext6
 ```
 
 This code was tested in Ubuntu 16.04 and <Mac-version>.
@@ -41,7 +43,7 @@ Simply run the following code:
 ```
 git clone https://github.com/Not-Boring/AutoSIGN.git
 cd AutoSIGN/models
-wget "https://storage.googleapis.com/luizgh-datasets/models/signet_models.zip"
+wget "https://storage.googleapis.com/luizgh-datasepython ts/models/signet_models.zip"
 unzip signet_models.zip
 ``` 
 
