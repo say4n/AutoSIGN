@@ -1,24 +1,25 @@
+from __future__ import print_function
 import os
 from flask import Flask, flash, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
-import tensorflow as tf
 
-# # Process_Folder
+# # # Process_Folder
+# import tensorflow as tf
 
-from scipy.misc import imread
-from preprocess.normalize import preprocess_signature
+# from scipy.misc import imread
+# from preprocess.normalize import preprocess_signature
 
-#import signet
-import tf_signet
-#from cnn_model import CNNModel
-from tf_cnn_model import TF_CNNModel
+# #import signet
+# import tf_signet
+# #from cnn_model import CNNModel
+# from tf_cnn_model import TF_CNNModel
 
-import numpy as np
-import sys
-import scipy.io
+# import numpy as np
+# import sys
+# import scipy.io
 
 
-UPLOAD_FOLDER = '.'
+UPLOAD_FOLDER = './data'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
 THRESHOLD = 10
@@ -30,43 +31,43 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 
-def compare_signatures(path1,path2):
+# def compare_signatures(path1,path2):
 
-    canvas_size = (952, 1360)
-    max1 = 0
-    max2 = 0
+#     canvas_size = (952, 1360)
+#     max1 = 0
+#     max2 = 0
 
-    # Load the model
-    model_weight_path = 'models/signet.pkl'
-    #model = TF_CNNModel(signet, model_weight_path)
-    model = TF_CNNModel(tf_signet, model_weight_path)
+#     # Load the model
+#     model_weight_path = 'models/signet.pkl'
+#     #model = TF_CNNModel(signet, model_weight_path)
+#     model = TF_CNNModel(tf_signet, model_weight_path)
 
-    sess = tf.Session()
-    sess.run(tf.global_variables_initializer())
+#     sess = tf.Session()
+#     sess.run(tf.global_variables_initializer())
 
-    original1 = imread(path1, flatten=1)
-    processed1 = preprocess_signature(original1, canvas_size)
+#     original1 = imread(path1, flatten=1)
+#     processed1 = preprocess_signature(original1, canvas_size)
 
-    original2 = imread(path2, flatten=1)
-    processed2 = preprocess_signature(original2, canvas_size)
+#     original2 = imread(path2, flatten=1)
+#     processed2 = preprocess_signature(original2, canvas_size)
 
-    feature_vector1 = model.get_feature_vector(sess,processed1)
-    feature_vector2 = model.get_feature_vector(sess,processed2) 
-    feature_vector1 = feature_vector1.T
-    feature_vector2 = feature_vector2.T 
+#     feature_vector1 = model.get_feature_vector(sess,processed1)
+#     feature_vector2 = model.get_feature_vector(sess,processed2)
+#     feature_vector1 = feature_vector1.T
+#     feature_vector2 = feature_vector2.T
 
-    dist = (abs(feature_vector1**2 - feature_vector2**2))**(0.5)
-    #print(dist)
+#     dist = (abs(feature_vector1**2 - feature_vector2**2))**(0.5)
+#     #print(dist)
 
-    for idx, val in enumerate(dist):
-        # print(val.shape)
-        if np.isnan(val):
-            dist[idx] = 0
+#     for idx, val in enumerate(dist):
+#         # print(val.shape)
+#         if np.isnan(val):
+#             dist[idx] = 0
 
-    dist = np.sum(dist)
-    #print(dist)
+#     dist = np.sum(dist)
+#     #print(dist)
 
-    return dist
+#     return dist
 
 
 @app.route("/")
@@ -91,36 +92,25 @@ def verify():
     """
     if request.method == "POST":
         # check if the post request has the file part
-        if 'signature_image' not in request.files:
-            flash(u'No file was uploaded, please try again!', 'error')
+
+        try:
+            signatureA = request.form.get("signatureA")
+            signatureB = request.form.get("signatureB")
+            security_lvl = request.form.get("security")
+        except:
+            flash(u'An error occured, please try again!', 'error')
             return redirect("/")
 
-        uuid = request.form.get('uuid')
+        print("type(signatureA): ", type(signatureA))
+        print("type(signatureB): ", type(signatureB))
 
-        file = request.files['signature_image']
-        gt_file = request.files['signature_gt_image']
-
-        # if user does not select file, browser also
-        # submit a empty part without filename
-        if file.filename == '' or gt_file.filename == '':
-            flash(u'Empty image uploaded, please try again!', 'error')
-            return redirect("/")
-        
-        if file and allowed_file(file.filename) and gt_file and allowed_file(gt_file.filename):
-            filename = secure_filename(file.filename)
-            fp1 = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            file.save(fp1)
-
-            gt_filename = secure_filename(gt_file.filename)
-            fp2 = os.path.join(app.config['UPLOAD_FOLDER'], gt_filename)
-            gt_file.save(fp2)
-
-
-            result = compare_signatures(fp1, fp2)
-            return render_template("result.html", dist=result)
+        return render_template("result.html")
 
 
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.jinja_env.auto_reload = True
+    app.config['TEMPLATES_AUTO_RELOAD'] = True
+
+    app.run(debug=True, host='0.0.0.0')
 
