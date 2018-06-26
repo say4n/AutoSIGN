@@ -14,7 +14,7 @@ from werkzeug.utils import secure_filename
 # #from cnn_model import CNNModel
 # from tf_cnn_model import TF_CNNModel
 
-# import numpy as np
+import numpy as np
 # import sys
 # import scipy.io
 
@@ -23,6 +23,7 @@ UPLOAD_FOLDER = './data'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
 THRESHOLD = 10
+DEBUG = True
 
 app = Flask(__name__)
 app.secret_key = "super secret key"
@@ -91,20 +92,34 @@ def verify():
     }
     """
     if request.method == "POST":
-        # check if the post request has the file part
-
         try:
-            signatureA = request.form.get("signatureA")
-            signatureB = request.form.get("signatureB")
+            signatureA = request.files.get("signatureA")
+            signatureB = request.files.get("signatureB")
+
             security_lvl = request.form.get("security")
+
+            filenameA = secure_filename(signatureA.filename)
+            signature_pathA = os.path.join(app.config['UPLOAD_FOLDER'], filenameA)
+            signatureA.save(signature_pathA)
+
+            filenameB = secure_filename(signatureB.filename)
+            signature_pathB = os.path.join(app.config['UPLOAD_FOLDER'], filenameB)
+            signatureB.save(signature_pathB)
+
+            dist, decision, same_percent, forg_percent, diff_percent = compare_signatures(signature_pathA,
+                                                                                          signature_pathB,
+                                                                                          security_lvl)
+
         except:
             flash(u'An error occured, please try again!', 'error')
             return redirect("/")
 
-        print("type(signatureA): ", type(signatureA))
-        print("type(signatureB): ", type(signatureB))
+        if DEBUG:
+            print("type(signatureA): ", type(signatureA))
+            print("type(signatureB): ", type(signatureB))
+            print("type(security_lvl): ", type(security_lvl))
 
-        return render_template("result.html")
+        return render_template("result.html", decision=decision)
 
 
 
@@ -112,5 +127,5 @@ if __name__ == "__main__":
     app.jinja_env.auto_reload = True
     app.config['TEMPLATES_AUTO_RELOAD'] = True
 
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=DEBUG, host='0.0.0.0')
 
