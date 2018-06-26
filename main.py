@@ -156,7 +156,7 @@ def verify():
             print("type(signatureB): ", type(signatureB))
             print("type(security_lvl): ", type(security_lvl))
 
-        return render_template("result.html", decision=decision)
+        return render_template("result.html", dist=dist)
 
 
 
