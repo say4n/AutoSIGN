@@ -3,20 +3,20 @@ import os
 from flask import Flask, flash, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
 
-# # # Process_Folder
-# import tensorflow as tf
+ # Process_Folder
+import tensorflow as tf
 
-# from scipy.misc import imread
-# from preprocess.normalize import preprocess_signature
+from scipy.misc import imread
+from preprocess.normalize import preprocess_signature
 
-# #import signet
-# import tf_signet
-# #from cnn_model import CNNModel
-# from tf_cnn_model import TF_CNNModel
+#import signet
+import tf_signet
+#from cnn_model import CNNModel
+from tf_cnn_model import TF_CNNModel
 
-# import numpy as np
-# import sys
-# import scipy.io
+import numpy as np
+import sys
+import scipy.io
 
 
 UPLOAD_FOLDER = './data'
