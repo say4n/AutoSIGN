@@ -143,6 +143,8 @@ def verify():
             signature_pathB = os.path.join(app.config['UPLOAD_FOLDER'], filenameB)
             signatureB.save(signature_pathB)
 
+            security_lvl = int(security_lvl)
+
             dist, decision, same_percent, forg_percent, diff_percent = compare_signatures(signature_pathA,
                                                                                           signature_pathB,
                                                                                           security_lvl)
