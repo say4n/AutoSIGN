@@ -107,3 +107,6 @@ venv.bak/
 
 # My ignores
 tmp/*
+
+# Test folders
+signet_tests/

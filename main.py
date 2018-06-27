@@ -38,9 +38,9 @@ main_thr_1 = 950.0 # Normal
 main_thr_2 = 800.0 # High
 main_thr_3 = 700.0 # Very High
 
-same_upper  = 1050.0
-same_middle = 800.0
-same_lower  = 600.0
+same_upper  = 1100.0
+same_middle = 850.0
+same_lower  = 650.0
 
 forg_upper  = 1350.0
 forg_middle = 1120.0
@@ -146,6 +146,10 @@ def compare_signatures(path1,path2,level):
         same_per = 0.0
         forg_per = 0.0
         diff_per = 100.0
+
+    same_per = float("{0:.2f}".format(same_per))
+    forg_per = float("{0:.2f}".format(forg_per))
+    diff_per = float("{0:.2f}".format(diff_per))
 
     return dist,decision,same_per,forg_per,diff_per
 
