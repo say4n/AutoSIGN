@@ -133,40 +133,15 @@ limitations under the License
             <div class="mdl-grid">
                 <div class="mdl-cell mdl-cell--12-col">
                     {% if decision %}
-                        <h4>Signature matches.</h4>
+                        <h3>Signature matches.</h3>
                     {% else %}
-                        <h4>Signature doesn't match.</h4>
+                        <h3>Signature doesn't match.</h3>
                     {% endif %}
-
-                    <!-- <div class="mdl-cell mdl-cell--8-col">
-                        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-                            <thead>
-                                <tr>
-                                    <th class="mdl-data-table__cell--non-numeric">Metric</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="mdl-data-table__cell--non-numeric">Same Person</td>
-                                    <td>{{ same_percent }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="mdl-data-table__cell--non-numeric">Forgery</td>
-                                    <td>{{ forg_percent }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="mdl-data-table__cell--non-numeric">Different Person</td>
-                                    <td>{{ diff_percent }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div> -->
 
                     <!-- Charts -->
 
                     <div class="mdl-grid">
-                        <div class="mdl-cell mdl-cell--4-col">
+                        <div class="mdl-cell mdl-cell--3-col">
                             <!-- Same Signature -->
                             <svg width="100%" height="100%" viewBox="0 0 42 42" class="donut">
                               <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
@@ -186,7 +161,7 @@ limitations under the License
                         </div>
 
 
-                        <div class="mdl-cell mdl-cell--4-col">
+                        <div class="mdl-cell mdl-cell--3-col">
                             <!-- Forged Signature -->
                             <svg width="100%" height="100%" viewBox="0 0 42 42" class="donut">
                               <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
@@ -206,7 +181,7 @@ limitations under the License
                         </div>
 
 
-                        <div class="mdl-cell mdl-cell--4-col">
+                        <div class="mdl-cell mdl-cell--3-col">
                             <!-- Different Signature -->
                             <svg width="100%" height="100%" viewBox="0 0 42 42" class="donut">
                               <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
