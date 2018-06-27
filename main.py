@@ -189,7 +189,7 @@ def allowed_file(filename):
 
 @app.route("/dashboard")
 def dashboard():
-    return render_template("dashboard.html")
+    return render_template("dashboard.html",username=current_user.username)
 
 @app.route("/verify", methods=["POST"])
 def verify():
@@ -236,7 +236,8 @@ def verify():
                                decision=bool(decision),
                                same_percent=same_percent,
                                forg_percent=forg_percent,
-                               diff_percent=diff_percent)
+                               diff_percent=diff_percent,
+                               username=current_user.username)
 
 
 if __name__ == "__main__":
