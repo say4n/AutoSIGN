@@ -111,19 +111,22 @@ limitations under the License
                         {% endwith %}
                     </div>
                     <form action="/verify" method="post" enctype="multipart/form-data">
+
                         <div class="mdl-cell mdl-cell--12-col mdl-textfield mdl-js-textfield mdl-textfield--file">
-                            <input class="mdl-textfield__input" placeholder="Upload Signature A" type="text" id="uploadFileA" readonly required/>
+                            <input class="mdl-textfield__input" placeholder="Upload Signature A" type="text" id="uploadFileA" readonly/>
                             <div class="mdl-button mdl-button--primary mdl-button--icon mdl-button--file">
                                 <i class="material-icons">attach_file</i>
-                                <input type="file" name="signatureA" id="uploadBtnA">
+                                <input type="file" name="signatureA" id="uploadBtnA" required>
                             </div>
                         </div>
 
+
+
                         <div class="mdl-cell mdl-cell--12-col mdl-textfield mdl-js-textfield mdl-textfield--file">
-                            <input class="mdl-textfield__input" placeholder="Upload Signature B" type="text" id="uploadFileB" readonly required/>
+                            <input class="mdl-textfield__input" placeholder="Upload Signature B" type="text" id="uploadFileB" readonly/>
                             <div class="mdl-button mdl-button--primary mdl-button--icon mdl-button--file">
                                 <i class="material-icons">attach_file</i>
-                                <input type="file" name="signatureB" id="uploadBtnB">
+                                <input type="file" name="signatureB" id="uploadBtnB" required>
                             </div>
                         </div>
 
@@ -132,11 +135,11 @@ limitations under the License
                             <div class="mdl-cell mdl-cell--8-col">
                                 <div class="mdl-textfield mdl-js-textfield getmdl-select">
                                     <input class="mdl-textfield__input" value="" id="security" readonly/>
-                                    <input value="" type="hidden" name="security" required/>
+                                    <input type="hidden" name="security" required/>
                                     <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
                                     <label class="mdl-textfield__label" for="security">Security Level</label>
                                     <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu" for="security">
-                                        <li class="mdl-menu__item" data-val="0">Normal</li>
+                                        <li class="mdl-menu__item" data-val="0" data-selected="true">Normal</li>
                                         <li class="mdl-menu__item" data-val="1">High</li>
                                         <li class="mdl-menu__item" data-val="2">Fort Knox</li>
                                     </ul>
