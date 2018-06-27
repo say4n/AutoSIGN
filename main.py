@@ -2,6 +2,8 @@ from __future__ import print_function
 import os
 from flask import Flask, flash, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
+from flask_sqlalchemy import SQLAlchemy
+from flask_user import login_required, UserManager, UserMixin, SQLAlchemyAdapter, current_user
 
  # Process_Folder
 import tensorflow as tf
@@ -27,10 +29,31 @@ THRESHOLD = 10
 DEBUG = True
 
 app = Flask(__name__)
-app.secret_key = "super secret key"
+
+app.secret_key = "ultra super secret key"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # limit maximum allowed payload to 16 megabytes
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+
+app.config['CSRF_ENABLED'] = True
+app.config['USER_ENABLE_EMAIL'] = False
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/ubuntu/autosign.db'
+
+
+
+db = SQLAlchemy(app)
+
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50), nullable=False, unique=True)
+    password = db.Column(db.String(255), nullable=False, server_default='')
+    active = db.Column(db.Boolean(), nullable=False, server_default='0')
+
+
+db_adapter = SQLAlchemyAdapter(db, User)
+user_manager = UserManager(db_adapter, app)
+
 
 # Thresholds
 
@@ -155,8 +178,9 @@ def compare_signatures(path1,path2,level):
 
 
 @app.route("/")
+@login_required
 def index():
-    return render_template("index.html")
+    return render_template("index.html", username=current_user.username)
 
 
 def allowed_file(filename):
