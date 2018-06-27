@@ -133,9 +133,15 @@ limitations under the License
             <div class="mdl-grid">
                 <div class="mdl-cell mdl-cell--12-col">
                     {% if decision %}
-                        <h3>Signature matches.</h3>
+                        <h3>
+                            <i class="material-icons">verified_user</i>
+                            Signature matches.
+                        </h3>
                     {% else %}
-                        <h3>Signature doesn't match.</h3>
+                        <h3>
+                            <i class="material-icons">error</i>
+                            Signature doesn't match.
+                        </h3>
                     {% endif %}
 
                     <!-- Charts -->
