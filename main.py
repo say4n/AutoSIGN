@@ -34,8 +34,12 @@ app.secret_key = "ultra super secret key"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # limit maximum allowed payload to 16 megabytes
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+
 app.config['CSRF_ENABLED'] = True
 app.config['USER_ENABLE_EMAIL'] = False
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/ubuntu/autosign.db'
+
 
 
 db = SQLAlchemy(app)
