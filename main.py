@@ -38,7 +38,7 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 app.config['CSRF_ENABLED'] = True
 app.config['USER_ENABLE_EMAIL'] = False
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/ubuntu/autosign.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./autosign.db'
 
 
 
