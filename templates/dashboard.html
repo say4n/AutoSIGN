@@ -87,76 +87,76 @@ limitations under the License
                 <a class="mdl-navigation__link" href="/dashboard">
                     <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Dashboard
                 </a>
-                <!-- <a class="mdl-navigation__link" href="">
-                    <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>About
-                </a> -->
-                <div class="mdl-layout-spacer"></div>
-                <a class="mdl-navigation__link" href="">
-                    <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i>
-                    <span class="visuallyhidden">Help</span>
-                </a>
             </nav>
+            
         </div>
 
 
         <main class="mdl-layout__content mdl-color--grey-100">
-            <div class="mdl-grid">
-                <div class="mdl-cell mdl-cell--8-col">
-                    <div class="mdl-cell mdl-cell--12-col">
-                        {% with messages = get_flashed_messages(with_categories=true) %}
-                            {% if messages %}
-                            <ul class="flashes">
-                                {% for category, message in messages %}
-                                <li class="{{ category }}">{{ message }}</li>
-                                {% endfor %}
-                            </ul>
-                            {% endif %}
-                        {% endwith %}
+            <div class = "mdl-grid">
+                <div class="mdl-cell mdl-cell--4-col">
+                <div class="demo-card-square mdl-card mdl-shadow--2dp">
+                    <div class="mdl-card__title mdl-card--expand">
+                        <h2 class="mdl-card__title-text">Update</h2>
                     </div>
-                    <form action="/verify" method="post" enctype="multipart/form-data">
-
-                        <div class="mdl-cell mdl-cell--12-col mdl-textfield mdl-js-textfield mdl-textfield--file">
-                            <input class="mdl-textfield__input" placeholder="Upload Signature A" type="text" id="uploadFileA" readonly/>
-                            <div class="mdl-button mdl-button--primary mdl-button--icon mdl-button--file">
-                                <i class="material-icons">attach_file</i>
-                                <input type="file" name="signatureA" id="uploadBtnA" required>
-                            </div>
-                        </div>
-
-
-
-                        <div class="mdl-cell mdl-cell--12-col mdl-textfield mdl-js-textfield mdl-textfield--file">
-                            <input class="mdl-textfield__input" placeholder="Upload Signature B" type="text" id="uploadFileB" readonly/>
-                            <div class="mdl-button mdl-button--primary mdl-button--icon mdl-button--file">
-                                <i class="material-icons">attach_file</i>
-                                <input type="file" name="signatureB" id="uploadBtnB" required>
-                            </div>
-                        </div>
-
-
-                        <div class="mdl-grid">
-                            <div class="mdl-cell mdl-cell--8-col">
-                                <div class="mdl-textfield mdl-js-textfield getmdl-select">
-                                    <input class="mdl-textfield__input" value="" id="security" readonly/>
-                                    <input type="hidden" name="security" required/>
-                                    <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
-                                    <label class="mdl-textfield__label" for="security">Security Level</label>
-                                    <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu" for="security">
-                                        <li class="mdl-menu__item" data-val="0" data-selected="true">Normal</li>
-                                        <li class="mdl-menu__item" data-val="1">High</li>
-                                        <li class="mdl-menu__item" data-val="2">Fort Knox</li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="mdl-cell mdl-cell--4-col">
-                                <!-- Raised button with ripple -->
-                                <button type="submit" class="mdl-button mdl-button--colored mdl-js-button mdl-button--raised mdl-js-ripple-effect" >
-                                    Compute&nbsp;&nbsp;<i class="material-icons">memory</i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    <div class="mdl-card__supporting-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Aenan convallis.
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                        View Updates
+                    </a>
+                    </div>
+                </div>
+                </div>
+                <div class="mdl-cell mdl-cell--4-col">
+                <div class="demo-card-square mdl-card mdl-shadow--2dp">
+                    <div class="mdl-card__title mdl-card--expand">
+                        <h2 class="mdl-card__title-text">Update</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Aenan convallis.
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                        View Updates
+                    </a>
+                    </div>
+                </div>
+                </div>
+                <div class="mdl-cell mdl-cell--4-col">
+                <div class="demo-card-square mdl-card mdl-shadow--2dp">
+                    <div class="mdl-card__title mdl-card--expand">
+                        <h2 class="mdl-card__title-text">Update</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Aenan convallis.
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                        View Updates
+                    </a>
+                    </div>
+                </div>
+                </div>
+                <div class="mdl-cell mdl-cell--4-col">
+                <div class="demo-card-square mdl-card mdl-shadow--2dp">
+                    <div class="mdl-card__title mdl-card--expand">
+                        <h2 class="mdl-card__title-text">Update</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Aenan convallis.
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                        View Updates
+                    </a>
+                    </div>
+                </div>
                 </div>
             </div>
         </main>

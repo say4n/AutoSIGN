@@ -23,6 +23,8 @@ The following libraries are required
 * libgtk2.0-dev
 * libsm6 
 * libxext6
+* flask_user
+* flask_sqlalchemy
 
 They can be installed by running the following commands: 
 
@@ -59,6 +61,8 @@ unzip signet_models.zip
    * scipy
    * tensorflow
    * flask
+   * flask_user
+   * flask_sqlalchemy
 
   #### Functions
    * compare_signatures : Accepts paths to two images, computes the similarity between them
