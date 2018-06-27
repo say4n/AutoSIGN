@@ -3,7 +3,7 @@ import os
 from flask import Flask, flash, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
-from flask_user import login_required, UserManager, UserMixin, SQLAlchemyAdapter
+from flask_user import login_required, UserManager, UserMixin, SQLAlchemyAdapter, current_user
 
  # Process_Folder
 import tensorflow as tf
@@ -180,7 +180,7 @@ def compare_signatures(path1,path2,level):
 @app.route("/")
 @login_required
 def index():
-    return render_template("index.html")
+    return render_template("index.html", username=current_user.username)
 
 
 def allowed_file(filename):
