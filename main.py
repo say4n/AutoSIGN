@@ -35,10 +35,10 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 # Thresholds
 
 main_thr_1 = 950.0 # Normal
-main_thr_2 = 800.0 # High
-main_thr_3 = 700.0 # Very High
+main_thr_2 = 880 # High
+main_thr_3 = 800.0 # Very High
 
-same_upper  = 1100.0
+same_upper  = 1050.0
 same_middle = 850.0
 same_lower  = 650.0
 
