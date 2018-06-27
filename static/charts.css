@@ -28,3 +28,11 @@
   -webkit-transform: translateY(0.7em);
   transform: translateY(0.7em);
 }
+
+.green {
+    color:  #ff0000;
+}
+
+.red {
+    color:  #2c9f45;
+}
