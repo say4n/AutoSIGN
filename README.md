@@ -20,6 +20,9 @@ The following libraries are required
 * Lasagne
 * Tensorflow
 * Flask
+* libgtk2.0-dev
+* libsm6 
+* libxext6
 
 They can be installed by running the following commands: 
 
@@ -46,6 +49,79 @@ cd AutoSIGN/models
 wget "https://storage.googleapis.com/luizgh-datasepython ts/models/signet_models.zip"
 unzip signet_models.zip
 ``` 
+
+## Source File(s)
+
+### main.py
+
+  #### Dependencies
+   * numpy
+   * scipy
+   * tensorflow
+   * flask
+
+  #### Functions
+   * compare_signatures : Accepts paths to two images, computes the similarity between them
+
+  #### API Routes
+   * /index: Landing page view
+   * /verify: Signature verification endpoint
+             accepts POST requests with payloads `uuid`,`signature_image` and `signature_gt_image`, the former being the   
+             unique identifier of the customer and the later two being either jpeg or png images (UUID may not be used here)
+
+### tf_CNN.py
+
+  #### Dependencies
+   * tensorflow
+   * numpy
+   * cPickle
+  #### Functions
+   * `_init_` : Initializes the CNN.
+   * `get_feature_vector` : Sends an image through one forward pass of the CNN and outputs the Feature Vector required to 
+                          compare signatures.
+          
+          
+### tf_signet.py
+
+  #### Dependencies
+   * tensorflow 
+   * Tensorflow-slim
+  #### Functions
+   * `build_architecture` : Builds the CNN architecture to be used and loads the baseline pre-trained weights using the 
+                          following 3 base functions. 
+   * `conv_bn` : Implements Convolutional Layers.
+   * `dense_bn` : Implements Fully-Connected Layers.
+   * `batch_norm` : Implements Batch Normalization to be used in the above functions.
+
+### tf_example.py
+This File compares some results with the ones obtained by the us,to ensure consistency in all the dependencies used throughout the project. 
+
+### normalize.py
+
+  #### Dependencies
+   * cv2
+   * numpy
+   * scipy
+   * tesseract 
+
+  #### Functions
+   * `preprocess_signature`: Uses the following three functions to pre-process the signature images into the fixed input size 
+                           of the CNN. This does all the centering, noise-removal and everything else that is necessary for 
+                           the Model to successfully learn from/process the signatures.
+   * `Crop_center`,`resize_image` and `normalize_image`: 
+
+### lasagne_to_tf.py
+
+  #### Dependencies
+   * numpy
+
+  #### Functions
+There are three classes and corresponding initialization functions to change the model from Lasagne to Tensorflow, as 
+Lasagne uses the format BCHW, while tensorflow uses BHWC, and also there is some difference between the Convolution
+Filters as they are flipped with respect to each other.
+
+These functions implements those changes to load the pre-trained model we use as our baseline. 
+
 
 ## Develop
 
