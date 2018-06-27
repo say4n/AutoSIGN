@@ -46,9 +46,9 @@ forg_upper  = 1350.0
 forg_middle = 1120.0
 forg_lower  = 810.0
 
-diff_upper  = 1800.0
-diff_middle = 1345.0
-diff_lower  = 1150.0
+diff_upper  = 1600.0
+diff_middle = 1200.0
+diff_lower  = 1000.0
 
 
 # level 0 = Normal, 1 = High, 2 = Very High
