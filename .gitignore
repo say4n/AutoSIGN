@@ -110,3 +110,6 @@ tmp/*
 
 # Test folders
 signet_tests/
+
+# Data folder
+data/
