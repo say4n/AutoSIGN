@@ -79,7 +79,7 @@ limitations under the License
                                 <h2 class="mdl-card__title-text">Outcomes</h2>
                             </div>
                             <div class="mdl-card__supporting-text">
-                                {% if decision %}
+                                {% if test.res_decsn %}
                                 Signature matches.
                                 {% else %}
                                 Signature doesn't match.
@@ -88,7 +88,7 @@ limitations under the License
                                 Raw Distance: {{ test.res_dist }}<br/>
                                 Same Percentage: {{ test.res_same_per }}<br/>
                                 Forgery Percentage: {{ test.res_forg_per }}<br/>
-                                Different Percentage{{ test.res_diff_per }}<br/>
+                                Different Percentage: {{ test.res_diff_per }}<br/>
                                 Signature A: {{ test.signature_1 }}<br/>
                                 Signature B: {{ test.signature_2 }}
                             </div>
