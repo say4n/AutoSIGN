@@ -112,7 +112,7 @@ same_upper  = 1050.0
 same_middle = 850.0
 same_lower  = 650.0
 
-forg_upper  = 1350.0
+forg_upper  = 1250.0
 forg_middle = 1120.0
 forg_lower  = 810.0
 
