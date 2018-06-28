@@ -1,6 +1,7 @@
 from __future__ import print_function
 import os
 from flask import Flask, flash, request, redirect, url_for, render_template
+from datetime import datetime
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
 from flask_user import login_required, UserManager, UserMixin, SQLAlchemyAdapter, current_user
@@ -39,6 +40,7 @@ app.config['CSRF_ENABLED'] = True
 app.config['USER_ENABLE_EMAIL'] = False
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./autosign.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
 
@@ -49,11 +51,37 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(50), nullable=False, unique=True)
     password = db.Column(db.String(255), nullable=False, server_default='')
     active = db.Column(db.Boolean(), nullable=False, server_default='0')
+    #tests = db.relationship('Test', backref='Test', lazy='dynamic')
 
 
 db_adapter = SQLAlchemyAdapter(db, User)
 user_manager = UserManager(db_adapter, app)
 
+'''
+class Sign_image(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    image_name = db.Column(db.String(50), nullable=False, unique=True)
+    tests = db.relationship('Test', backref='Test', lazy='dynamic')
+
+    def __repr__(self):
+        return '<Post {}>'.format(self.id)
+
+class Test(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    res_dist = db.Column(db.Float)
+    res_decsn = db.Column(db.Integer)
+    res_same_per = db.Column(db.Float) 
+    res_forg_per = db.Column(db.Float)
+    res_diff_per = db.Column(db.Float)
+
+    signature_1 = db.Column(db.Integer, db.ForeignKey('sign_image.id'))
+    signature_2 = db.Column(db.Integer, db.ForeignKey('sign_image.id'))
+
+    def __repr__(self):
+        return '<Post {}>'.format(self.id)
+'''
 
 # Thresholds
 
@@ -187,11 +215,11 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route("/dashboard")
+@app.route("/dashboard/")
 def dashboard():
     return render_template("dashboard.html",username=current_user.username)
 
-@app.route("/verify", methods=["POST"])
+@app.route("/verify/", methods=["POST"])
 def verify():
     """
     accepts POST of json data
