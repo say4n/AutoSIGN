@@ -20,6 +20,7 @@ from tf_cnn_model import TF_CNNModel
 import numpy as np
 import sys
 import scipy.io
+from PIL import Image
 
 
 
@@ -241,6 +242,26 @@ def dashboard():
     return render_template("dashboard.html",
                            username=current_user.username,
                            all_tests = current_user.tests.order_by(Test.timestamp.asc()).all())
+
+@app.route('/image/<path:filename>')
+def image(filename):
+    try:
+        w = int(request.args['w'])
+        h = int(request.args['h'])
+    except (KeyError, ValueError):
+        return send_from_directory(UPLOAD_FOLDER, filename)
+
+    try:
+        im = Image.open(os.path.join(UPLOAD_FOLDER, filename))
+        im.thumbnail((w, h), Image.ANTIALIAS)
+        io = StringIO.StringIO()
+        im.save(io, format='JPEG')
+        return Response(io.getvalue(), mimetype='image/jpeg')
+
+    except IOError:
+        abort(404)
+
+    return send_from_directory('.', filename)
 
 @app.route("/verify/", methods=["POST"])
 def verify():
