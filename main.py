@@ -96,8 +96,8 @@ class Test(db.Model):
     res_forg_per = db.Column(db.Float)
     res_diff_per = db.Column(db.Float)
 
-    signature_1 = db.Column(db.String(50), nullable=False, unique=True)
-    signature_2 = db.Column(db.String(50), nullable=False, unique=True)
+    signature_1 = db.Column(db.String(50), nullable=False)
+    signature_2 = db.Column(db.String(50), nullable=False)
 
     def __repr__(self):
         return '<Post {}>'.format(self.id)
@@ -127,6 +127,8 @@ def compare_signatures(path1,path2,level):
     canvas_size = (952, 1360)
     max1 = 0
     max2 = 0
+
+    tf.reset_default_graph()
 
     # Load the model
     model_weight_path = 'models/signet.pkl'
