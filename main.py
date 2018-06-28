@@ -1,6 +1,6 @@
 from __future__ import print_function
 import os
-from flask import Flask, flash, request, redirect, url_for, render_template
+from flask import Flask, flash, request, redirect, url_for, render_template, render_template_string, send_from_directory
 from datetime import datetime
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
@@ -20,6 +20,7 @@ from tf_cnn_model import TF_CNNModel
 import numpy as np
 import sys
 import scipy.io
+from PIL import Image
 
 
 
@@ -91,7 +92,7 @@ class Test(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     res_dist = db.Column(db.Float)
-    res_decsn = db.Column(db.Integer)
+    res_decsn = db.Column(db.Boolean)
     res_same_per = db.Column(db.Float)
     res_forg_per = db.Column(db.Float)
     res_diff_per = db.Column(db.Float)
@@ -223,7 +224,7 @@ def compare_signatures(path1,path2,level):
     forg_per = float("{0:.2f}".format(forg_per))
     diff_per = float("{0:.2f}".format(diff_per))
 
-    return dist,decision,same_per,forg_per,diff_per
+    return dist, decision, same_per, forg_per, diff_per
 
 
 @app.route("/")
@@ -238,7 +239,29 @@ def allowed_file(filename):
 
 @app.route("/dashboard/")
 def dashboard():
-    return render_template("dashboard.html",username=current_user.username,all_tests = current_user.tests.order_by(Test.timestamp.asc()).all())
+    return render_template("dashboard.html",
+                           username=current_user.username,
+                           all_tests = current_user.tests.order_by(Test.timestamp.asc()).all())
+
+@app.route('/image/<path:filename>')
+def image(filename):
+    try:
+        w = int(request.args['w'])
+        h = int(request.args['h'])
+    except (KeyError, ValueError):
+        return send_from_directory(UPLOAD_FOLDER, filename)
+
+    try:
+        im = Image.open(os.path.join(UPLOAD_FOLDER, filename))
+        im.thumbnail((w, h), Image.ANTIALIAS)
+        io = StringIO.StringIO()
+        im.save(io, format='JPEG')
+        return Response(io.getvalue(), mimetype='image/jpeg')
+
+    except IOError:
+        abort(404)
+
+    return send_from_directory(UPLOAD_FOLDER, filename)
 
 @app.route("/verify/", methods=["POST"])
 def verify():
@@ -271,7 +294,15 @@ def verify():
                                                                                           signature_pathB,
                                                                                           security_lvl)
 
-            test2 = Test(user_id=current_user.id,res_dist=dist,res_decsn=decision,res_same_per=same_percent,res_forg_per=forg_percent,res_diff_per=diff_percent,signature_1=filenameA,signature_2=filenameB)
+            test2 = Test(user_id=current_user.id,
+                         res_dist=dist,
+                         res_decsn=bool(decision),
+                         res_same_per=same_percent,
+                         res_forg_per=forg_percent,
+                         res_diff_per=diff_percent,
+                         signature_1=filenameA,
+                         signature_2=filenameB)
+
             db.session.add(test2)
             db.session.commit()
 
