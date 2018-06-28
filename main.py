@@ -236,7 +236,7 @@ def allowed_file(filename):
 
 @app.route("/dashboard/")
 def dashboard():
-    return render_template("dashboard.html",username=current_user.username,all_tests = current_user.tests.all())
+    return render_template("dashboard.html",username=current_user.username,all_tests = current_user.tests.order_by(Test.timestamp.asc()).all())
 
 @app.route("/verify/", methods=["POST"])
 def verify():
