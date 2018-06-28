@@ -51,7 +51,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(50), nullable=False, unique=True)
     password = db.Column(db.String(255), nullable=False, server_default='')
     active = db.Column(db.Boolean(), nullable=False, server_default='0')
-    #tests = db.relationship('Test', backref='Test', lazy='dynamic')
+    tests = db.relationship('Test', backref='Test', lazy='dynamic')
 
 
 db_adapter = SQLAlchemyAdapter(db, User)
@@ -65,6 +65,8 @@ class Sign_image(db.Model):
 
     def __repr__(self):
         return '<Post {}>'.format(self.id)
+
+
 
 class Test(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -82,6 +84,23 @@ class Test(db.Model):
     def __repr__(self):
         return '<Post {}>'.format(self.id)
 '''
+
+
+class Test(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    res_dist = db.Column(db.Float)
+    res_decsn = db.Column(db.Integer)
+    res_same_per = db.Column(db.Float) 
+    res_forg_per = db.Column(db.Float)
+    res_diff_per = db.Column(db.Float)
+
+    signature_1 = db.Column(db.String(50), nullable=False, unique=True)
+    signature_2 = db.Column(db.String(50), nullable=False, unique=True)
+
+    def __repr__(self):
+        return '<Post {}>'.format(self.id)
 
 # Thresholds
 
