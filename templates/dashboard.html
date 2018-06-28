@@ -76,22 +76,21 @@ limitations under the License
                     <div class="mdl-cell mdl-cell--4-col">
                         <div class="demo-card-square mdl-card mdl-shadow--2dp">
                             <div class="mdl-card__title mdl-card--expand">
-                                <h3 class="mdl-card__title-text">Test {{ test.id }}</h3>
+                                {% if test.res_decsn %}
+                                <h5 class="mdl-card__title-text">Signature matches.</h5>
+                                {% else %}
+                                <h5 class="mdl-card__title-text">Signature doesn't match.</h5>
+                                {% endif %}
                             </div>
                             <div class="mdl-card__supporting-text">
-                                {% if test.res_decsn %}
-                                <h5>Signature matches.</h5>
-                                {% else %}
-                                <h5>Signature doesn't match.</h5>
-                                {% endif %}
-                                <br/>
+
                                 Raw Distance: {{ test.res_dist }}<br/>
                                 Same Percentage: {{ test.res_same_per }}<br/>
                                 Forgery Percentage: {{ test.res_forg_per }}<br/>
                                 Different Percentage: {{ test.res_diff_per }}<br/>
                                 Signature A: {{ test.signature_1 }}<br/>
                                 Signature B: {{ test.signature_2 }}<br/><br/>
-                                <small>UTC Timestamp : {{ test.timestamp }}</small>
+                                <sup><sub><small>Test {{ test.id }} conducted at {{ test.timestamp }}</small></sub></sup>
                             </div>
                             <div class="mdl-card__actions mdl-card--border">
                             <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
