@@ -236,7 +236,7 @@ def allowed_file(filename):
 
 @app.route("/dashboard/")
 def dashboard():
-    return render_template("dashboard.html",username=current_user.username)
+    return render_template("dashboard.html",username=current_user.username,all_tests = current_user.tests.all())
 
 @app.route("/verify/", methods=["POST"])
 def verify():
@@ -268,6 +268,8 @@ def verify():
             dist, decision, same_percent, forg_percent, diff_percent = compare_signatures(signature_pathA,
                                                                                           signature_pathB,
                                                                                           security_lvl)
+
+
 
         except:
             flash(u'An error occured, please try again!', 'error')
