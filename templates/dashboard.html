@@ -84,9 +84,17 @@ limitations under the License
                             </div>
                             <div class="mdl-card__supporting-text">
 
+                                <style type="text/css">
+                                    .signature {
+                                        display: block;
+                                        width: 50%;
+                                        height: auto;
+                                    }
+                                </style>
+
                                 <div class="mdl-grid">
-                                    <img src="/image/{{ test.signature_1 }}" style="max-width: 50%; width:auto; height: auto;">
-                                    <img src="/image/{{ test.signature_2 }}" style="max-width: 50%; width:auto; height: auto;">
+                                    <img class="signature" src="/image/{{ test.signature_1 }}">
+                                    <img class="signature" src="/image/{{ test.signature_2 }}">
                                 </div>
 
                                 Raw Distance: {{ test.res_dist }}<br/>
