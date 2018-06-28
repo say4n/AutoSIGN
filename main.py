@@ -74,7 +74,7 @@ class Test(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     res_dist = db.Column(db.Float)
     res_decsn = db.Column(db.Integer)
-    res_same_per = db.Column(db.Float) 
+    res_same_per = db.Column(db.Float)
     res_forg_per = db.Column(db.Float)
     res_diff_per = db.Column(db.Float)
 
@@ -92,7 +92,7 @@ class Test(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     res_dist = db.Column(db.Float)
     res_decsn = db.Column(db.Integer)
-    res_same_per = db.Column(db.Float) 
+    res_same_per = db.Column(db.Float)
     res_forg_per = db.Column(db.Float)
     res_diff_per = db.Column(db.Float)
 
@@ -273,7 +273,8 @@ def verify():
             db.session.add(test2)
             db.session.commit()
 
-        except:
+        except Exception as e:
+            print(e)
             flash(u'An error occured, please try again!', 'error')
             return redirect("/")
 
