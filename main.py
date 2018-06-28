@@ -223,7 +223,7 @@ def compare_signatures(path1,path2,level):
     forg_per = float("{0:.2f}".format(forg_per))
     diff_per = float("{0:.2f}".format(diff_per))
 
-    return dist,decision,same_per,forg_per,diff_per
+    return dist, decision, same_per, forg_per, diff_per
 
 
 @app.route("/")
