@@ -269,7 +269,9 @@ def verify():
                                                                                           signature_pathB,
                                                                                           security_lvl)
 
-
+            test2 = Test(user_id=current_user.id,res_dist=dist,res_decsn=decision,res_same_per=same_percent,res_forg_per=forg_percent,res_diff_per=diff_percent,signature_1=filenameA,signature_2=filenameB)
+            db.session.add(test2)
+            db.session.commit()
 
         except:
             flash(u'An error occured, please try again!', 'error')
