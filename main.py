@@ -1,6 +1,6 @@
 from __future__ import print_function
 import os
-from flask import Flask, flash, request, redirect, url_for, render_template
+from flask import Flask, flash, request, redirect, url_for, render_template, render_template_string, send_from_directory
 from datetime import datetime
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
@@ -261,7 +261,7 @@ def image(filename):
     except IOError:
         abort(404)
 
-    return send_from_directory('.', filename)
+    return send_from_directory(UPLOAD_FOLDER, filename)
 
 @app.route("/verify/", methods=["POST"])
 def verify():
