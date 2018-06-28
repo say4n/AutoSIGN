@@ -76,7 +76,7 @@ limitations under the License
                     <div class="mdl-cell mdl-cell--4-col">
                         <div class="demo-card-square mdl-card mdl-shadow--2dp">
                             <div class="mdl-card__title mdl-card--expand">
-                                <h2 class="mdl-card__title-text">Outcomes</h2>
+                                <h3 class="mdl-card__title-text">Test {{ test.id }}</h3>
                             </div>
                             <div class="mdl-card__supporting-text">
                                 {% if test.res_decsn %}
@@ -90,7 +90,8 @@ limitations under the License
                                 Forgery Percentage: {{ test.res_forg_per }}<br/>
                                 Different Percentage: {{ test.res_diff_per }}<br/>
                                 Signature A: {{ test.signature_1 }}<br/>
-                                Signature B: {{ test.signature_2 }}
+                                Signature B: {{ test.signature_2 }}<br/><br/>
+                                <small>UTC Timestamp : {{ test.timestamp }}</small>
                             </div>
                             <div class="mdl-card__actions mdl-card--border">
                             <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
