@@ -91,7 +91,7 @@ class Test(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     res_dist = db.Column(db.Float)
-    res_decsn = db.Column(db.Integer)
+    res_decsn = db.Column(db.Boolean)
     res_same_per = db.Column(db.Float)
     res_forg_per = db.Column(db.Float)
     res_diff_per = db.Column(db.Float)
@@ -236,7 +236,9 @@ def allowed_file(filename):
 
 @app.route("/dashboard/")
 def dashboard():
-    return render_template("dashboard.html",username=current_user.username,all_tests = current_user.tests.order_by(Test.timestamp.asc()).all())
+    return render_template("dashboard.html",
+                           username=current_user.username,
+                           all_tests = current_user.tests.order_by(Test.timestamp.asc()).all())
 
 @app.route("/verify/", methods=["POST"])
 def verify():
@@ -269,7 +271,15 @@ def verify():
                                                                                           signature_pathB,
                                                                                           security_lvl)
 
-            test2 = Test(user_id=current_user.id,res_dist=dist,res_decsn=decision,res_same_per=same_percent,res_forg_per=forg_percent,res_diff_per=diff_percent,signature_1=filenameA,signature_2=filenameB)
+            test2 = Test(user_id=current_user.id,
+                         res_dist=dist,
+                         res_decsn=bool(decision),
+                         res_same_per=same_percent,
+                         res_forg_per=forg_percent,
+                         res_diff_per=diff_percent,
+                         signature_1=filenameA,
+                         signature_2=filenameB)
+
             db.session.add(test2)
             db.session.commit()
 
