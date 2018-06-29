@@ -226,7 +226,7 @@ limitations under the License
           var flag = document.querySelector('input[name="options"]:checked').value
 
           var xhttp = new XMLHttpRequest();
-          xhttp.open("GET", "/flag_report", true);
+          xhttp.open("POST", "/flag_report", true);
           xhttp.send("id=" + test_id + "&comment=" + encodeURIComponent(comment) + "&flag=" + flag);
 
           dialog_{{test.id}}.close();
