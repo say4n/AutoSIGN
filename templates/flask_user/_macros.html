@@ -12,21 +12,21 @@
         {% endif %}
     </div>
 {%- endmacro %}
- 
+
 {% macro render_checkbox_field(field, label=None) -%}
     {% if not label %}{% set label=field.label.text %}{% endif %}
     <div class="checkbox">
-        <label>
+        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
             {{ field(type='checkbox', **kwargs) }} {{ label }}
         </label>
     </div>
 {%- endmacro %}
- 
+
 {% macro render_radio_field(field) -%}
     {% for value, label, checked in field.iter_choices() %}
         <div class="radio">
-            <label>
-                <input type="radio" name="{{ field.id }}" id="{{ field.id }}" value="{{ value }}"{% if checked %} checked{% endif %}>
+            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="{{ field.id }}">
+                <input type="radio" class="mdl-checkbox__input" name="{{ field.id }}" id="{{ field.id }}" value="{{ value }}"{% if checked %} checked{% endif %}>
                 {{ label }}
             </label>
         </div>
@@ -35,8 +35,8 @@
 
 {% macro render_submit_field(field, label=None, tabindex=None) -%}
     {% if not label %}{% set label=field.label.text %}{% endif %}
-    {#<button type="submit" class="form-control btn btn-default btn-primary">{{label}}</button>#}
-    <input type="submit" class="btn btn-default btn-primary" value="{{label}}"
+    {#<button type="submit" class="form-control mdl-button mdl-js-button mdl-button--raised mdl-button--colored">{{label}}</button>#}
+    <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" value="{{label}}"
            {% if tabindex %}tabindex="{{ tabindex }}"{% endif %}
            >
 {%- endmacro %}
