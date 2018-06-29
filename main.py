@@ -5,6 +5,7 @@ from datetime import datetime
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
 from flask_user import login_required, UserManager, UserMixin, SQLAlchemyAdapter, current_user
+from flask_migrate import Migrate
 
  # Process_Folder
 import tensorflow as tf
@@ -46,6 +47,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -96,12 +98,21 @@ class Test(db.Model):
     res_same_per = db.Column(db.Float)
     res_forg_per = db.Column(db.Float)
     res_diff_per = db.Column(db.Float)
-
     signature_1 = db.Column(db.String(50), nullable=False)
     signature_2 = db.Column(db.String(50), nullable=False)
+    errors = db.relationship('Error', backref='Error', lazy='dynamic')
+
 
     def __repr__(self):
         return '<Test {}>'.format(self.id)
+
+class Error(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    ref_test = db.Column(db.Integer, db.ForeignKey('test.id'))
+    comment = db.Column(db.String(500), nullable=False)
+    flag = db.Column(db.Integer)
+
 
 # Thresholds
 
