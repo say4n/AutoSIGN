@@ -101,7 +101,55 @@ limitations under the License
         <main class="mdl-layout__content mdl-color--grey-100">
             <div class = "mdl-grid">
                 {% for flag in flags %}
-                    {{ flag.id }}
+                    {% for test in tests %}
+                        {% if test.id is flag.ref_test %}
+                            <div class="mdl-cell mdl-cell--4-col">
+                                <div class="demo-card-square mdl-card mdl-shadow--2dp">
+                                    <div class="mdl-card__title mdl-card--expand">
+                                        {% if test.res_decsn %}
+                                        <h5 class="mdl-card__title-text">Signature matches.</h5>
+                                        {% else %}
+                                        <h5 class="mdl-card__title-text">Signature doesn't match.</h5>
+                                        {% endif %}
+                                    </div>
+                                    <div class="mdl-card__supporting-text">
+
+                                        <style type="text/css">
+                                            .signature {
+                                                display: block;
+                                                width: 50%;
+                                                height: 100%;
+                                            }
+                                        </style>
+
+                                        <div class="mdl-grid">
+                                            <img class="signature" src="/image/{{ test.signature_1 }}">
+                                            <img class="signature" src="/image/{{ test.signature_2 }}">
+                                        </div>
+
+                                        Raw Distance: {{ test.res_dist }}<br/>
+                                        Same Percentage: {{ test.res_same_per }}<br/>
+                                        Forgery Percentage: {{ test.res_forg_per }}<br/>
+                                        Different Percentage: {{ test.res_diff_per }}<br/>
+                                        Signature A: {{ test.signature_1 }}<br/>
+                                        Signature B: {{ test.signature_2 }}<br/><br/>
+                                        <sup><sub><small>Test #{{ test.id }} conducted at {{ test.timestamp }}</small></sub></sup>
+                                    </div>
+                                    <div class="mdl-card__actions mdl-card--border">
+                                        Reported Class:
+                                        {% if flag.flag is 0 %}
+                                        <h5 class="mdl-card__title-text">Same</h5>
+                                        {% else if flag.flag is 1 %}
+                                        <h5 class="mdl-card__title-text">Forged</h5>
+                                        {% else if flag.flag is 2 %}
+                                        <h5 class="mdl-card__title-text">Different</h5>
+                                        {% endif %}
+                                        Comment : {{ flag.comment }}</br>>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
                 {% endfor %}
             </div>
         </main>
