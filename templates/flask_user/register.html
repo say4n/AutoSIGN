@@ -4,6 +4,13 @@
 {% from "flask_user/_macros.html" import render_field, render_submit_field %}
 <h1>{%trans%}Register{%endtrans%}</h1>
 
+<div class="cmdl-grid col-xs-6 mdl-cell--6-col-phone text-right">
+    {% if user_manager.enable_register %}
+        <a href="{{ url_for('user.login') }}" tabindex='290'>
+            {%trans%}Already registered? Sign in.{%endtrans%}</a>
+    {% endif %}
+</div>
+
 <form action="" method="POST" novalidate formnovalidate class="form" role="form">
     {{ form.hidden_tag() }}
 
@@ -12,17 +19,12 @@
     <div class="form-group {% if field.errors %}has-error{% endif %}">
         {# Label on left, "Already registered? Sign in." on right #}
         <div class="row mdl-grid">
-            <div class="col-xs-6 mdl-cell--6-col-phone">
-                <label for="{{ field.id }}" class="control-label">{{ field.label.text }}</label>
-            </div>
-            <div class="col-xs-6 mdl-cell--6-col-phone text-right">
-                {% if user_manager.enable_register %}
-                    <a href="{{ url_for('user.login') }}" tabindex='290'>
-                        {%trans%}Already registered? Sign in.{%endtrans%}</a>
-                {% endif %}
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                {{ field(class_='mdl-textfield__input') }}
+                <label class="mdl-textfield__label" for="{{ field.id }}">{{ field.label.text }}</label>
             </div>
         </div>
-        {{ field(class_='form-control') }}
+
         {% if field.errors %}
             {% for e in field.errors %}
                 <p class="help-block">{{ e }}</p>
