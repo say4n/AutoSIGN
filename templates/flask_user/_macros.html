@@ -15,7 +15,7 @@
 
 {% macro render_checkbox_field(field, label=None) -%}
     {% if not label %}{% set label=field.label.text %}{% endif %}
-    <div class="checkbox">
+    <div class="mdl-cell checkbox">
         <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
             {{ field(type='checkbox', **kwargs) }} {{ label }}
         </label>
@@ -24,9 +24,9 @@
 
 {% macro render_radio_field(field) -%}
     {% for value, label, checked in field.iter_choices() %}
-        <div class="radio">
+        <div class="mdl-cell radio">
             <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="{{ field.id }}">
-                <input type="radio" class="mdl-checkbox__input" name="{{ field.id }}" id="{{ field.id }}" value="{{ value }}"{% if checked %} checked{% endif %}>
+                <input type="checkbox" class="mdl-checkbox__input" name="{{ field.id }}" id="{{ field.id }}" value="{{ value }}"{% if checked %} checked{% endif %}>
                 {{ label }}
             </label>
         </div>
