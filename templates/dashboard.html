@@ -226,6 +226,7 @@ limitations under the License
           var flag = document.querySelector('input[name="options"]:checked').value
 
           var xhttp = new XMLHttpRequest();
+          xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
           xhttp.open("POST", "/flag_report", true);
           xhttp.send("id=" + test_id + "&comment=" + encodeURIComponent(comment) + "&flag=" + flag);
 
