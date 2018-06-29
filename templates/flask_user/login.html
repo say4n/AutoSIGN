@@ -7,7 +7,7 @@
 <div class="mdl-grid col-xs-6 mdl-cell--6-col-phone text-right">
     {% if user_manager.enable_register and not user_manager.require_invitation %}
         <a href="{{ url_for('user.register') }}">
-            {%trans%}New here? Register.{%endtrans%}</a>
+            {%trans%}New here? Register{%endtrans%}</a>
     {% endif %}
 </div>
 
