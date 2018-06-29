@@ -111,9 +111,9 @@ limitations under the License
                                     <div class="mdl-card__supporting-text">
 
                                         {% if test.res_decsn %}
-                                        Signature matches.
+                                        <h5>Signature matches.</h5>
                                         {% else %}
-                                        Signature doesn't match.
+                                        <h5>Signature doesn't match.</h5>
                                         {% endif %}
 
                                         <style type="text/css">
@@ -146,6 +146,7 @@ limitations under the License
                                         {% elif flag_single.flag == 2 %}
                                         Different
                                         {% endif %}
+                                        </br>
                                         Comment : {{ flag_single.comment }}</br>
                                     </div>
                                 </div>
