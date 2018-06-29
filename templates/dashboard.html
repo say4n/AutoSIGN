@@ -222,11 +222,12 @@ limitations under the License
         });
         dialog_{{test.id}}.querySelector('.proceed').addEventListener('click', function() {
           var test_id = {{test.id}};
-          var comment = document.querySelector("#comments-{{ test.id }}").text;
+          var comment = document.querySelector("#comments-{{ test.id }}").value;
           var flag = document.querySelector('input[name="options"]:checked').value
 
           var xhttp = new XMLHttpRequest();
           xhttp.open("POST", "/flag_report", true);
+          xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
           xhttp.send("id=" + test_id + "&comment=" + encodeURIComponent(comment) + "&flag=" + flag);
 
           dialog_{{test.id}}.close();
