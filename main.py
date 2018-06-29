@@ -119,7 +119,6 @@ flag = db.Column(db.String(500), nullable=False)
 comment
 flag = db.Column(db.Integer)
 
-
 # Thresholds
 
 main_thr_1 = 920.0 # Normal
