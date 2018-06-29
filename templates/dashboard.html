@@ -148,9 +148,46 @@ limitations under the License
                             This will flag the test to our Quality Assurace team, do you want to proceed?
                           </p>
                           <p>
+                            <div>
+                                <ul class="mdl-list">
+                                    <li class="mdl-list__item">
+                                        <span class="mdl-list__item-primary-content">
+                                          Same Person
+                                        </span>
+                                        <span class="mdl-list__item-secondary-action">
+                                          <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="test-{{ test.id }}-list-option-1">
+                                            <input type="radio" id="test-{{ test.id }}-list-option-1" class="mdl-radio__button" name="options" value="0" />
+                                          </label>
+                                        </span>
+                                      </li>
+
+                                      <li class="mdl-list__item">
+                                        <span class="mdl-list__item-primary-content">
+                                          Forgery
+                                        </span>
+                                        <span class="mdl-list__item-secondary-action">
+                                          <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="test-{{ test.id }}-list-option-1">
+                                            <input type="radio" id="test-{{ test.id }}-list-option-1" class="mdl-radio__button" name="options" value="1" />
+                                          </label>
+                                        </span>
+                                      </li>
+
+                                      <li class="mdl-list__item">
+                                        <span class="mdl-list__item-primary-content">
+                                          Different Person
+                                        </span>
+                                        <span class="mdl-list__item-secondary-action">
+                                          <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="test-{{ test.id }}-list-option-1">
+                                            <input type="radio" id="test-{{ test.id }}-list-option-1" class="mdl-radio__button" name="options" value="2" />
+                                          </label>
+                                        </span>
+                                      </li>
+                                </ul>
+                            </div>
+
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                               <input class="mdl-textfield__input" type="text" id="comments-{{ test.id }}">
-                              <label class="mdl-textfield__label" for="comments-{{ test.id }}">Comments?</label>
+                              <label class="mdl-textfield__label" for="comments-{{ test.id }}">Additional Comments</label>
                             </div>
                           </p>
                         </div>
