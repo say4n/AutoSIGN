@@ -109,15 +109,9 @@ class Test(db.Model):
 class Error(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-    ref_test
-comment
-flag = db.Column(db.Integer, db.ForeignKey('test.id'))
-    ref_test
-comment
-flag = db.Column(db.String(500), nullable=False)
-    ref_test
-comment
-flag = db.Column(db.Integer)
+    ref_test = db.Column(db.Integer, db.ForeignKey('test.id'))
+    comment = db.Column(db.String(500), nullable=False)
+    flag = db.Column(db.Integer)
 
 # Thresholds
 
