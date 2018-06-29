@@ -247,6 +247,7 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+
 @app.route("/dashboard/")
 @login_required
 def dashboard():
@@ -261,6 +262,22 @@ def errors():
                            username=current_user.username,
                            flags=Error.query.all(),
                            tests=Test.query.all())
+
+
+@app.route("/flag_report", methods=["POST"])
+def flag_endpoint():
+    try:
+        test_id = request.form.get("id")
+        comment = request.form.get("comment")
+        flag = request.form.get("flag")
+
+        err = Error(ref_test=test_id, comment=comment, flag=flag)
+
+        db.session.add(err)
+        db.session.commit()
+    except Exception as e:
+        print(e)
+        abort(400)
 
 
 @app.route('/image/<path:filename>')
@@ -283,6 +300,7 @@ def image(filename):
 
     return send_from_directory(UPLOAD_FOLDER, filename)
 
+
 @app.route("/verify/", methods=["POST"])
 @login_required
 def verify():
@@ -294,56 +312,55 @@ def verify():
         "uuid" : uuid
     }
     """
-    if request.method == "POST":
-        try:
-            signatureA = request.files.get("signatureA")
-            signatureB = request.files.get("signatureB")
+    try:
+        signatureA = request.files.get("signatureA")
+        signatureB = request.files.get("signatureB")
 
-            security_lvl = request.form.get("security")
+        security_lvl = request.form.get("security")
 
-            filenameA = secure_filename(signatureA.filename)
-            signature_pathA = os.path.join(app.config['UPLOAD_FOLDER'], filenameA)
-            signatureA.save(signature_pathA)
+        filenameA = secure_filename(signatureA.filename)
+        signature_pathA = os.path.join(app.config['UPLOAD_FOLDER'], filenameA)
+        signatureA.save(signature_pathA)
 
-            filenameB = secure_filename(signatureB.filename)
-            signature_pathB = os.path.join(app.config['UPLOAD_FOLDER'], filenameB)
-            signatureB.save(signature_pathB)
+        filenameB = secure_filename(signatureB.filename)
+        signature_pathB = os.path.join(app.config['UPLOAD_FOLDER'], filenameB)
+        signatureB.save(signature_pathB)
 
-            security_lvl = int(security_lvl)
+        security_lvl = int(security_lvl)
 
-            dist, decision, same_percent, forg_percent, diff_percent = compare_signatures(signature_pathA,
-                                                                                          signature_pathB,
-                                                                                          security_lvl)
+        dist, decision, same_percent, forg_percent, diff_percent = compare_signatures(signature_pathA,
+                                                                                      signature_pathB,
+                                                                                      security_lvl)
 
-            test2 = Test(user_id=current_user.id,
-                         res_dist=dist,
-                         res_decsn=bool(decision),
-                         res_same_per=same_percent,
-                         res_forg_per=forg_percent,
-                         res_diff_per=diff_percent,
-                         signature_1=filenameA,
-                         signature_2=filenameB)
+        test_ = Test(user_id=current_user.id,
+                     res_dist=dist,
+                     res_decsn=bool(decision),
+                     res_same_per=same_percent,
+                     res_forg_per=forg_percent,
+                     res_diff_per=diff_percent,
+                     signature_1=filenameA,
+                     signature_2=filenameB)
 
-            db.session.add(test2)
-            db.session.commit()
+        db.session.add(test_)
+        db.session.commit()
 
-        except Exception as e:
-            print(e)
-            flash(u'An error occured, please try again!', 'error')
-            return redirect("/")
+    except Exception as e:
+        print(e)
+        flash(u'An error occured, please try again!', 'error')
+        return redirect("/")
 
-        if DEBUG:
-            print("type(signatureA): ", type(signatureA))
-            print("type(signatureB): ", type(signatureB))
-            print("type(security_lvl): ", type(security_lvl))
+    if DEBUG:
+        print("type(signatureA): ", type(signatureA))
+        print("type(signatureB): ", type(signatureB))
+        print("type(security_lvl): ", type(security_lvl))
 
-        return render_template("result.html",
-                               dist=dist,
-                               decision=bool(decision),
-                               same_percent=same_percent,
-                               forg_percent=forg_percent,
-                               diff_percent=diff_percent,
-                               username=current_user.username)
+    return render_template("result.html",
+                           dist=dist,
+                           decision=bool(decision),
+                           same_percent=same_percent,
+                           forg_percent=forg_percent,
+                           diff_percent=diff_percent,
+                           username=current_user.username)
 
 
 if __name__ == "__main__":
