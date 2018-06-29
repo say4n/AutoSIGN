@@ -23,8 +23,6 @@ import sys
 import scipy.io
 from PIL import Image
 
-
-
 UPLOAD_FOLDER = './data'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
@@ -55,7 +53,10 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(255), nullable=False, server_default='')
     active = db.Column(db.Boolean(), nullable=False, server_default='0')
     tests = db.relationship('Test', backref='Test', lazy='dynamic')
-
+    total_tests = db.Column(db.Integer,default=0)
+    sign_matched = db.Column(db.Integer,default=0)
+    errors_reported = db.Column(db.Integer,default=0)  
+    total_time_taken = db.Column(db.Float,default=0.0)
 
 db_adapter = SQLAlchemyAdapter(db, User)
 user_manager = UserManager(db_adapter, app)
@@ -93,6 +94,7 @@ class Test(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    level = db.Column(db.Integer, default=0)
     res_dist = db.Column(db.Float)
     res_decsn = db.Column(db.Boolean)
     res_same_per = db.Column(db.Float)
@@ -253,6 +255,7 @@ def allowed_file(filename):
 def dashboard():
     return render_template("dashboard.html",
                            username=current_user.username,
+                           curr_user=current_user,
                            all_tests=current_user.tests.order_by(Test.timestamp.desc()).all())
 
 @app.route("/reports/")
@@ -265,6 +268,7 @@ def errors():
 
 
 @app.route("/flag_report", methods=["POST"])
+@login_required
 def flag_endpoint():
     try:
         test_id = request.form.get("id")
@@ -272,8 +276,10 @@ def flag_endpoint():
         flag = request.form.get("flag")
 
         err = Error(ref_test=test_id, comment=comment, flag=flag)
-
         db.session.add(err)
+        db.session.commit()
+
+        current_user.errors_reported = current_user.errors_reported + 1
         db.session.commit()
 
         return jsonify({"success": True})
@@ -330,9 +336,23 @@ def verify():
 
         security_lvl = int(security_lvl)
 
+        time_a = datetime.now()
+    
+
         dist, decision, same_percent, forg_percent, diff_percent = compare_signatures(signature_pathA,
                                                                                       signature_pathB,
                                                                                       security_lvl)
+
+        current_user.total_tests = current_user.total_tests + 1
+        db.session.commit()
+
+        if(decision == 1):
+            current_user.sign_matched = current_user.sign_matched + 1
+            db.session.commit()
+
+        time_b = datetime.now()
+        current_user.total_time_taken = (time_b-time_a).total_seconds() + current_user.total_time_taken
+        db.session.commit()
 
         test_ = Test(user_id=current_user.id,
                      res_dist=dist,

@@ -36,6 +36,7 @@ pip install https://github.com/Lasagne/Lasagne/archive/master.zip
 pip install opencv-python
 pip install flask
 pip install flask_migrate
+pip install datetime
 sudo apt-get update && sudo apt-get install libgtk2.0-dev
 sudo apt update && sudo apt install -y libsm6 libxext6
 ```

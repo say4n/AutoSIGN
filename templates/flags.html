@@ -133,7 +133,7 @@ limitations under the License
                                         Different Percentage: {{ test.res_diff_per }}<br/>
                                         Signature A: {{ test.signature_1 }}<br/>
                                         Signature B: {{ test.signature_2 }}<br/><br/>
-                                        <sup><sub><small>Test #{{ test.id }} conducted at {{ test.timestamp }}</small></sub></sup>
+                                        <sup><sub>Test #{{ test.id }} conducted at {{ test.timestamp.replace(microsecond=0) }}</sub></sup>
                                     </div>
                                     <div class="mdl-card__actions mdl-card--border">
                                         Reported Class:
@@ -144,7 +144,9 @@ limitations under the License
                                         {% elif flag_single.flag == 2 %}
                                         <h5 class="mdl-card__title-text">Different</h5>
                                         {% endif %}
-                                        Comment : {{ flag_single.comment }}</br>>
+                                        Comment : </br>
+                                        {{ flag_single.comment }}</br></br>
+                                        <sup><sub>Error #{{ flag_single.id }} reported at {{ flag_single.timestamp.replace(microsecond=0) }}</sub></sup>
                                     </div>
                                 </div>
                             </div>

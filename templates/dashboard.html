@@ -100,6 +100,16 @@ limitations under the License
 
         <main class="mdl-layout__content mdl-color--grey-100">
             <div class = "mdl-grid">
+                {% if curr_user.total_tests > 0 %}
+                    Total Tests : {{ curr_user.total_tests }}</br>
+                    Sign Matched : {{ curr_user.sign_matched }}</br>
+                    Matching Percentage : {{ ((curr_user.sign_matched|float/curr_user.total_tests)*100)|round(3,'common') }}</br>
+                    Errors Reported : {{ curr_user.errors_reported }}</br>
+                    Error Percentage : {{ ((curr_user.errors_reported|float/curr_user.total_tests)*100)|round(3,'common') }}</br>
+                    Average Time Taken (seconds): {{ (curr_user.total_time_taken/curr_user.total_tests)|round(3,'common') }}</br>
+                {% endif %}
+            </div>
+            <div class = "mdl-grid">
                 {% for test in all_tests %}
                     <div class="mdl-cell mdl-cell--4-col">
                         <div class="demo-card-square mdl-card mdl-shadow--2dp">
@@ -131,7 +141,7 @@ limitations under the License
                                 Different Percentage: {{ test.res_diff_per }}<br/>
                                 Signature A: {{ test.signature_1 }}<br/>
                                 Signature B: {{ test.signature_2 }}<br/><br/>
-                                <sup><sub><small>Test #{{ test.id }} conducted at {{ test.timestamp }}</small></sub></sup>
+                                <sup><sub>Test #{{ test.id }} conducted at {{ test.timestamp.replace(microsecond=0) }}</sub></sup>
                             </div>
                             <div class="mdl-card__actions mdl-card--border">
                                 <a id="report-{{ test.id }}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
@@ -155,7 +165,7 @@ limitations under the License
           </p>
           <p>
             <div>
-                What should the correct classification be?
+                <h6>What should the correct classification be?</h6>
                 <ul class="mdl-list">
                     <li class="mdl-list__item">
                         <span class="mdl-list__item-primary-content">
