@@ -252,7 +252,15 @@ def allowed_file(filename):
 def dashboard():
     return render_template("dashboard.html",
                            username=current_user.username,
-                           all_tests = current_user.tests.order_by(Test.timestamp.desc()).all())
+                           all_tests=current_user.tests.order_by(Test.timestamp.desc()).all())
+
+@app.route("/flags/")
+@login_required
+def errs():
+    return render_template("dashboard.html",
+                           username=current_user.username,
+                           flags=Error.query.all())
+
 
 @app.route('/image/<path:filename>')
 def image(filename):
