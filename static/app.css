@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:700');
+
 .mdl-button--file input {
   cursor: pointer;
   height: 100%;
@@ -18,9 +20,9 @@
 }
 
 .sbi {
-    color: rgb(68, 117, 225);
-    font-size: 2rem;
-    font-weight: 500;
+  color: rgb(68, 117, 225);
+  font-size: 2rem;
+  font-weight: 500;
 }
 
 .auto_sign {
@@ -28,17 +30,20 @@
 }
 
 .not_boring {
-    font-size: 2rem;
+  font-family: 'Raleway', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #000;
 }
 
 .flashes {
-    list-style: none;
+  list-style: none;
 }
 
 .error {
-    color: red;
+  color: red;
 }
 
 .file_upload {
-    display: none;
+  display: none;
 }
