@@ -99,35 +99,35 @@ limitations under the License
                                 Report Error
                             </a>
                             </div>
-
-                            <dialog id="report-{{ test.id }}-dialog" class="mdl-dialog">
-                                <h4 class="mdl-dialog__title">Report test #{{ test.id }}</h4>
-                                <div class="mdl-dialog__content">
-                                  <p>
-                                    This will flag the test to our Quality Assurace team, do you want to proceed?
-                                  </p>
-                                </div>
-                                <div class="mdl-dialog__actions">
-                                  <button type="button" class="mdl-button">Proceed</button>
-                                  <button type="button" class="mdl-button close">Close</button>
-                                </div>
-                            </dialog>
-
-                            <script>
-                                var dialog = document.querySelector('#report-{{ test.id }}-dialog');
-                                var showDialogButton = document.querySelector('#report-{{ test.id }}');
-                                if (! dialog.showModal) {
-                                  dialogPolyfill.registerDialog(dialog);
-                                }
-                                showDialogButton.addEventListener('click', function() {
-                                  dialog.showModal();
-                                });
-                                dialog.querySelector('.close').addEventListener('click', function() {
-                                  dialog.close();
-                                });
-                              </script>
                         </div>
                     </div>
+
+                    <dialog id="report-{{ test.id }}-dialog" class="mdl-dialog">
+                        <h4 class="mdl-dialog__title">Report test #{{ test.id }}</h4>
+                        <div class="mdl-dialog__content">
+                          <p>
+                            This will flag the test to our Quality Assurace team, do you want to proceed?
+                          </p>
+                        </div>
+                        <div class="mdl-dialog__actions">
+                          <button type="button" class="mdl-button">Proceed</button>
+                          <button type="button" class="mdl-button close">Close</button>
+                        </div>
+                    </dialog>
+
+                    <script>
+                        var dialog = document.querySelector('#report-{{ test.id }}-dialog');
+                        var showDialogButton = document.querySelector('#report-{{ test.id }}');
+                        if (! dialog.showModal) {
+                          dialogPolyfill.registerDialog(dialog);
+                        }
+                        showDialogButton.addEventListener('click', function() {
+                          dialog.showModal();
+                        });
+                        dialog.querySelector('.close').addEventListener('click', function() {
+                          dialog.close();
+                        });
+                    </script>
                 {% endfor %}
             </div>
         </main>
