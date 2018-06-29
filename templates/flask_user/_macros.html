@@ -17,7 +17,7 @@
     {% if not label %}{% set label=field.label.text %}{% endif %}
     <div class="mdl-cell checkbox">
         <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="{{ field.id }}">
-            {{ field(type='checkbox', class='mdl-checkbox__input', **kwargs) }} {{ label }}
+            {{ field(type='checkbox', class_='mdl-checkbox__input', **kwargs) }} {{ label }}
         </label>
     </div>
 {%- endmacro %}
