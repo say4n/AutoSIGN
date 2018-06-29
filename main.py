@@ -113,7 +113,6 @@ class Error(db.Model):
     comment = db.Column(db.String(500), nullable=False)
     flag = db.Column(db.Integer)
 
-
 # Thresholds
 
 main_thr_1 = 920.0 # Normal
