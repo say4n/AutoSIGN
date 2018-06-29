@@ -140,88 +140,91 @@ limitations under the License
                             </div>
                         </div>
                     </div>
-
-                    <dialog id="report-{{ test.id }}-dialog" class="mdl-dialog">
-                        <h4 class="mdl-dialog__title">Report test #{{ test.id }}</h4>
-                        <div class="mdl-dialog__content">
-                          <p>
-                            This will flag the test to our Quality Assurace team, do you want to proceed?
-                          </p>
-                          <p>
-                            <div>
-                                <ul class="mdl-list">
-                                    <li class="mdl-list__item">
-                                        <span class="mdl-list__item-primary-content">
-                                          Correct
-                                        </span>
-                                        <span class="mdl-list__item-secondary-action">
-                                          <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="test-{{ test.id }}-list-option-0">
-                                            <input type="radio" id="test-{{ test.id }}-list-option-0" class="mdl-radio__button" name="options" value="0" />
-                                          </label>
-                                        </span>
-                                      </li>
-
-                                      <li class="mdl-list__item">
-                                        <span class="mdl-list__item-primary-content">
-                                          Forgery
-                                        </span>
-                                        <span class="mdl-list__item-secondary-action">
-                                          <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="test-{{ test.id }}-list-option-1">
-                                            <input type="radio" id="test-{{ test.id }}-list-option-1" class="mdl-radio__button" name="options" value="1" />
-                                          </label>
-                                        </span>
-                                      </li>
-
-                                      <li class="mdl-list__item">
-                                        <span class="mdl-list__item-primary-content">
-                                          Different Signatures
-                                        </span>
-                                        <span class="mdl-list__item-secondary-action">
-                                          <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="test-{{ test.id }}-list-option-2">
-                                            <input type="radio" id="test-{{ test.id }}-list-option-2" class="mdl-radio__button" name="options" value="2" />
-                                          </label>
-                                        </span>
-                                      </li>
-                                </ul>
-                            </div>
-
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                              <input class="mdl-textfield__input" type="text" id="comments-{{ test.id }}">
-                              <label class="mdl-textfield__label" for="comments-{{ test.id }}">Additional Comments</label>
-                            </div>
-                          </p>
-                        </div>
-                        <div class="mdl-dialog__actions">
-                          <button type="button" class="mdl-button proceed">Proceed</button>
-                          <button type="button" class="mdl-button close">Close</button>
-                        </div>
-                    </dialog>
-
-                    <script>
-                        var dialog_{{test.id}} = document.querySelector('#report-{{ test.id }}-dialog');
-                        var showDialogButton_{{test.id}} = document.querySelector('#report-{{ test.id }}');
-
-                        if (! dialog_{{test.id}}.showModal) {
-                          dialogPolyfill.registerDialog(dialog_{{test.id}});
-                        }
-
-                        showDialogButton_{{test.id}}.addEventListener('click', function() {
-                          dialog_{{test.id}}.showModal();
-                        });
-
-                        dialog_{{test.id}}.querySelector('.close').addEventListener('click', function() {
-                          dialog_{{test.id}}.close();
-                        });
-                        dialog_{{test.id}}.querySelector('.proceed').addEventListener('click', function() {
-                          dialog_{{test.id}}.close();
-                        });
-                    </script>
-
                 {% endfor %}
             </div>
         </main>
 
     </div>
+
+    {% for test in all_tests %}
+    <dialog id="report-{{ test.id }}-dialog" class="mdl-dialog">
+        <h4 class="mdl-dialog__title">Report test #{{ test.id }}</h4>
+        <div class="mdl-dialog__content">
+          <p>
+            This will flag the test to our Quality Assurace team, do you want to proceed?
+          </p>
+          <p>
+            <div>
+                What should the correct classification be?
+                <ul class="mdl-list">
+                    <li class="mdl-list__item">
+                        <span class="mdl-list__item-primary-content">
+                          Correct
+                        </span>
+                        <span class="mdl-list__item-secondary-action">
+                          <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="test-{{ test.id }}-list-option-0">
+                            <input type="radio" id="test-{{ test.id }}-list-option-0" class="mdl-radio__button" name="options" value="0" />
+                          </label>
+                        </span>
+                      </li>
+
+                      <li class="mdl-list__item">
+                        <span class="mdl-list__item-primary-content">
+                          Forgery
+                        </span>
+                        <span class="mdl-list__item-secondary-action">
+                          <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="test-{{ test.id }}-list-option-1">
+                            <input type="radio" id="test-{{ test.id }}-list-option-1" class="mdl-radio__button" name="options" value="1" />
+                          </label>
+                        </span>
+                      </li>
+
+                      <li class="mdl-list__item">
+                        <span class="mdl-list__item-primary-content">
+                          Different Signatures
+                        </span>
+                        <span class="mdl-list__item-secondary-action">
+                          <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="test-{{ test.id }}-list-option-2">
+                            <input type="radio" id="test-{{ test.id }}-list-option-2" class="mdl-radio__button" name="options" value="2" />
+                          </label>
+                        </span>
+                      </li>
+                </ul>
+            </div>
+
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="comments-{{ test.id }}">
+              <label class="mdl-textfield__label" for="comments-{{ test.id }}">Additional Comments</label>
+            </div>
+          </p>
+        </div>
+        <div class="mdl-dialog__actions">
+          <button type="button" class="mdl-button proceed">Proceed</button>
+          <button type="button" class="mdl-button close">Close</button>
+        </div>
+    </dialog>
+
+    <script>
+        var dialog_{{test.id}} = document.querySelector('#report-{{ test.id }}-dialog');
+        var showDialogButton_{{test.id}} = document.querySelector('#report-{{ test.id }}');
+
+        if (! dialog_{{test.id}}.showModal) {
+          dialogPolyfill.registerDialog(dialog_{{test.id}});
+        }
+
+        showDialogButton_{{test.id}}.addEventListener('click', function() {
+          dialog_{{test.id}}.showModal();
+        });
+
+        dialog_{{test.id}}.querySelector('.close').addEventListener('click', function() {
+          dialog_{{test.id}}.close();
+        });
+        dialog_{{test.id}}.querySelector('.proceed').addEventListener('click', function() {
+          dialog_{{test.id}}.close();
+        });
+    </script>
+    {% endfor %}
+
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <script src="{{ url_for('static', filename='app.js') }}"></script>
 
