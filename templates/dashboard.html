@@ -222,7 +222,7 @@ limitations under the License
         });
         dialog_{{test.id}}.querySelector('.proceed').addEventListener('click', function() {
           var test_id = {{test.id}};
-          var comment = document.querySelector("comments-{{ test.id }}").text;
+          var comment = document.querySelector("#comments-{{ test.id }}").text;
           var flag = document.querySelector('input[options][checked]').value
 
           var xhttp = new XMLHttpRequest();
