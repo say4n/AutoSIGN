@@ -115,8 +115,8 @@
     </style>
   </head>
   <body>
-    <div class="autosign-layout mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">
-      <header class="autosign-header mdl-layout__header mdl-layout__header--scroll mdl-color--grey-100 mdl-color-text--grey-800">
+    <div class="autosign-layout mdl-layout mdl-layout--fixed-header mdl-js-layout">
+      <header class="autosign-header mdl-layout__header mdl-layout__header--scroll">
         <div class="mdl-layout__header-row">
           <!-- Title -->
           <span class="mdl-layout-title">AutoSIGN <sup>&beta;</sup></span>
@@ -126,7 +126,6 @@
 
           <!-- Navigation -->
           <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="">Link</a>
             {% if call_or_get(current_user.is_authenticated) %}
                 <a class="mdl-navigation__link" href="{{ url_for('user.profile') }}">{{ current_user.username }}</a>
                 <a class="mdl-navigation__link" href="{{ url_for('user.logout') }}">Sign out</a>
