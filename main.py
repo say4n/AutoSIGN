@@ -238,10 +238,11 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route("/dashboard/")
+@login_required
 def dashboard():
     return render_template("dashboard.html",
                            username=current_user.username,
-                           all_tests = current_user.tests.order_by(Test.timestamp.asc()).all())
+                           all_tests = current_user.tests.order_by(Test.timestamp.desc()).all())
 
 @app.route('/image/<path:filename>')
 def image(filename):
@@ -264,6 +265,7 @@ def image(filename):
     return send_from_directory(UPLOAD_FOLDER, filename)
 
 @app.route("/verify/", methods=["POST"])
+@login_required
 def verify():
     """
     accepts POST of json data
