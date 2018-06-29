@@ -1,6 +1,6 @@
 from __future__ import print_function
 import os
-from flask import Flask, flash, abort, request, redirect, url_for, render_template, render_template_string, send_from_directory
+from flask import Flask, flash, abort, request, redirect, url_for, render_template, render_template_string, send_from_directory, jsonify
 from datetime import datetime
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
@@ -275,6 +275,8 @@ def flag_endpoint():
 
         db.session.add(err)
         db.session.commit()
+
+        return jsonify({"success": True})
     except Exception as e:
         print(e)
         abort(400)
