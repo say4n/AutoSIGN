@@ -198,6 +198,7 @@ limitations under the License
             </div>
           </p>
         </div>
+
         <div class="mdl-dialog__actions">
           <button type="button" class="mdl-button proceed">Proceed</button>
           <button type="button" class="mdl-button close">Close</button>
@@ -220,6 +221,14 @@ limitations under the License
           dialog_{{test.id}}.close();
         });
         dialog_{{test.id}}.querySelector('.proceed').addEventListener('click', function() {
+          var test_id = {{test.id}};
+          var comment = document.querySelector("comments-{{ test.id }}").text;
+          var flag = document.querySelector('input[options][checked]').value
+
+          var xhttp = new XMLHttpRequest();
+          xhttp.open("GET", "/flag_report", true);
+          xhttp.send("id=" + test_id + "&comment=" + encodeURIComponent(comment) + "&flag=" + flag);
+
           dialog_{{test.id}}.close();
         });
     </script>
