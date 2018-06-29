@@ -255,12 +255,12 @@ def dashboard():
                            username=current_user.username,
                            all_tests=current_user.tests.order_by(Test.timestamp.desc()).all())
 
-@app.route("/error_handling/")
+@app.route("/reports/")
 @login_required
 def errors():
     return render_template("flags.html",
                            username=current_user.username,
-                           flags=Error.query.all(),
+                           flags_all=Error.query.all(),
                            tests=Test.query.all())
 
 

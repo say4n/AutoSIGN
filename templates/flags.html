@@ -100,9 +100,9 @@ limitations under the License
 
         <main class="mdl-layout__content mdl-color--grey-100">
             <div class = "mdl-grid">
-                {% for flag in flags %}
+                {% for flag_single in flags_all %}
                     {% for test in tests %}
-                        {% if test.id is flag.ref_test %}
+                        {% if test.id == flag_single.ref_test %}
                             <div class="mdl-cell mdl-cell--4-col">
                                 <div class="demo-card-square mdl-card mdl-shadow--2dp">
                                     <div class="mdl-card__title mdl-card--expand">
@@ -137,14 +137,14 @@ limitations under the License
                                     </div>
                                     <div class="mdl-card__actions mdl-card--border">
                                         Reported Class:
-                                        {% if flag.flag is 0 %}
+                                        {% if flag_single.flag == 0 %}
                                         <h5 class="mdl-card__title-text">Same</h5>
-                                        {% else if flag.flag is 1 %}
+                                        {% elif flag_single.flag == 1 %}
                                         <h5 class="mdl-card__title-text">Forged</h5>
-                                        {% else if flag.flag is 2 %}
+                                        {% elif flag_single.flag == 2 %}
                                         <h5 class="mdl-card__title-text">Different</h5>
                                         {% endif %}
-                                        Comment : {{ flag.comment }}</br>>
+                                        Comment : {{ flag_single.comment }}</br>>
                                     </div>
                                 </div>
                             </div>
