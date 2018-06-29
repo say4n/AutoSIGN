@@ -113,3 +113,6 @@ signet_tests/
 
 # Data folder
 data/
+
+
+.log
