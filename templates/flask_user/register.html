@@ -4,7 +4,7 @@
 {% from "flask_user/_macros.html" import render_field, render_submit_field %}
 <h1>{%trans%}Register{%endtrans%}</h1>
 
-<div class="cmdl-grid col-xs-6 mdl-cell--6-col-phone text-right">
+<div class="mdl-grid col-xs-6 mdl-cell--6-col-phone text-right">
     {% if user_manager.enable_register %}
         <a href="{{ url_for('user.login') }}" tabindex='290'>
             {%trans%}Already registered? Sign in.{%endtrans%}</a>

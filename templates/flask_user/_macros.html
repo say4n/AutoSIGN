@@ -1,10 +1,17 @@
 {% macro render_field(field, label=None, label_visible=true, right_url=None, right_label=None) -%}
     <div class="form-group {% if field.errors %}has-error{% endif %} {{ kwargs.pop('class_', '') }}">
         {% if field.type != 'HiddenField' and label_visible %}
-            {% if not label %}{% set label=field.label.text %}{% endif %}
-            <label for="{{ field.id }}" class="mdl-textfield__label">{{ label|safe }}</label>
+            {% if not label %}
+                {% set label=field.label.text %}
+            {% endif %}
+            <div class="row mdl-grid">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    {{ field(class_='mdl-textfield__input', **kwargs) }}
+                    <label for="{{ field.id }}" class="mdl-textfield__label">{{ label|safe }}</label>
+                </div>
+            </div>
         {% endif %}
-        {{ field(class_='mdl-textfield__input', **kwargs) }}
+
         {% if field.errors %}
             {% for e in field.errors %}
                 <p class="help-block">{{ e }}</p>
