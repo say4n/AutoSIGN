@@ -266,6 +266,7 @@ def errs():
 @app.route("/flag_report", methods=["POST"])
 def flag_endpoint():
     try:
+        import pdb; pdb.set_trace()
         test_id = request.form.get("id")
         comment = request.form.get("comment")
         flag = request.form.get("flag")
