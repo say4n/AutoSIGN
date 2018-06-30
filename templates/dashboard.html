@@ -175,11 +175,8 @@ limitations under the License
     .shape-fuschia {
       background-color: #34bf49;
     }
-    .shape-lemon-lime {
-      background-color: #b1c94e;
-    }
-    .shape-blue {
-      background-color: #377bbc;
+    .shape-red {
+      background-color: #0099e5;
     }
     .sr-only {
       position: absolute;
@@ -227,7 +224,7 @@ limitations under the License
                         <h6>Average Time Taken : {{ (curr_user.total_time_taken/curr_user.total_tests)|round(3,'common') }} seconds</h6>
                       </div> -->
 
-                      <div class="mdl-cell mdl-cell--4-col">
+                      <div class="mdl-cell mdl-cell--6-col">
                         <!-- Stats -->
                         <figure>
                           <div class="figure-content">
@@ -260,7 +257,7 @@ limitations under the License
                         </figure>
                       </div>
 
-                      <div class="mdl-cell mdl-cell--4-col">
+                      <div class="mdl-cell mdl-cell--6-col">
                         <!-- Stats -->
                         <figure>
                           <div class="figure-content">
@@ -268,7 +265,7 @@ limitations under the License
                               <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
                               <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#d2d3d4" stroke-width="4"></circle>
 
-                              <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#34bf49" stroke-width="4" stroke-dasharray="{{ ((curr_user.errors_reported|float/curr_user.total_tests)*100)|round(3,'common') }} {{ 100 - ((curr_user.errors_reported|float/curr_user.total_tests)*100)|round(3,'common') }}" stroke-dashoffset="75"></circle>
+                              <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#0099e5" stroke-width="4" stroke-dasharray="{{ ((curr_user.errors_reported|float/curr_user.total_tests)*100)|round(3,'common') }} {{ 100 - ((curr_user.errors_reported|float/curr_user.total_tests)*100)|round(3,'common') }}" stroke-dashoffset="75"></circle>
 
                               <g class="chart-text">
                                 <text x="50%" y="50%" class="chart-number">
@@ -285,7 +282,7 @@ limitations under the License
 
                             <ul class="figure-key-list" aria-hidden="true" role="presentation">
                               <li>
-                                <span class="shape-circle shape-fuschia"></span> Matched Signatures
+                                <span class="shape-circle shape-red"></span> Reported Errors
                               </li>
 
                             </ul>
