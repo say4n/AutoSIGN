@@ -180,5 +180,16 @@ Deploy using the provided Dockerfile!
 
 - Sayan Goswami
 - Ayan Sinha Mahaptra
-- Dibyadip Chatterjee
-- Arpan Bhowmik
+
+## Presentation Links
+  * Initial Pitch:
+        https://docs.google.com/presentation/d/1pbAOZM8xC0TRbq2eUiVT9vu5_wrmW_RgsaQg3pXNOcs/edit#slide=id.gd9c453428_0_16
+  * 4-Slide Gist:
+        https://docs.google.com/presentation/d/1RW9SC5ZtyvwlsXGoBjngLPIPRWyHzbXiDjoBz4Thjzc/edit#slide=id.g1f87997393_0_782
+  * End Product Presentation:
+        https://docs.google.com/presentation/d/1jgGh1k0kwmyMBOcpoPHd1lUIJ0UrtNFRtB6gUrQ0AT8/edit#slide=id.g3cbbbfc4a4_0_0
+  * Youtube Video Explanation:
+        https://www.youtube.com/watch?v=ryzBwsaE-pY&t=131s
+
+
+
