@@ -176,7 +176,7 @@ limitations under the License
       background-color: #34bf49;
     }
     .shape-red {
-      background-color: #0099e5;
+      background-color: #d2d3d4;
     }
     .sr-only {
       position: absolute;
@@ -265,7 +265,7 @@ limitations under the License
                               <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
                               <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#d2d3d4" stroke-width="4"></circle>
 
-                              <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#0099e5" stroke-width="4" stroke-dasharray="{{ ((curr_user.errors_reported|float/curr_user.total_tests)*100)|round(3,'common') }} {{ 100 - ((curr_user.errors_reported|float/curr_user.total_tests)*100)|round(3,'common') }}" stroke-dashoffset="75"></circle>
+                              <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#d2d3d4" stroke-width="4" stroke-dasharray="{{ ((curr_user.errors_reported|float/curr_user.total_tests)*100)|round(3,'common') }} {{ 100 - ((curr_user.errors_reported|float/curr_user.total_tests)*100)|round(3,'common') }}" stroke-dashoffset="75"></circle>
 
                               <g class="chart-text">
                                 <text x="50%" y="50%" class="chart-number">
