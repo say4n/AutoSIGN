@@ -146,14 +146,14 @@ These functions implements those changes to load the pre-trained model we use as
 
 ### templates/
    #### Html Files
-   base.html
-   head.html
-   drawer.html
-   nav_header.html
-   index.html
-   dsahboard.html
-   result.html
-   flags.html
+   - base.html
+   - head.html
+   - drawer.html
+   - nav_header.html
+   - index.html
+   - dashboard.html
+   - result.html
+   - flags.html
    
 ### Database : autosign.db 
  A sqlite3 database to store data according to our models.
