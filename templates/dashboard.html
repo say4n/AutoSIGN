@@ -198,6 +198,7 @@ limitations under the License
 
         {% include 'drawer.html' %}
 
+        <h1>Statistics</h1>
 
         <main class="mdl-layout__content mdl-color--grey-100">
             {% if curr_user.total_tests > 0 %}
@@ -205,7 +206,7 @@ limitations under the License
               <div class="mdl-cell mdl-cell--12-col">
                 <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col">
                     <div class="mdl-card__title mdl-card--expand">
-                      <h4 class="mdl-card__title-text">Statistics — {{ curr_user.total_tests }} test(s) submitted</h4>
+                      <h4 class="mdl-card__title-text">{{ curr_user.total_tests }} test(s) performed</h4>
                     </div>
 
                     <div class="mdl-grid">
