@@ -99,16 +99,26 @@ limitations under the License
 
 
         <main class="mdl-layout__content mdl-color--grey-100">
+            {% if curr_user.total_tests > 0 %}
             <div class = "mdl-grid">
-                {% if curr_user.total_tests > 0 %}
-                    Total Tests : {{ curr_user.total_tests }}</br>
-                    Sign Matched : {{ curr_user.sign_matched }}</br>
-                    Matching Percentage : {{ ((curr_user.sign_matched|float/curr_user.total_tests)*100)|round(3,'common') }}</br>
-                    Errors Reported : {{ curr_user.errors_reported }}</br>
-                    Error Percentage : {{ ((curr_user.errors_reported|float/curr_user.total_tests)*100)|round(3,'common') }}</br>
-                    Average Time Taken (seconds): {{ (curr_user.total_time_taken/curr_user.total_tests)|round(3,'common') }}</br>
-                {% endif %}
+              <div class="mdl-cell mdl-cell--12-col">
+                <div class="mdl-card mdl-shadow--2dp">
+                    <div class="mdl-card__title mdl-card--expand">
+                      <h4 class="mdl-card__title-text">Statistics</h4>
+                    </div>
+
+                    <div class="mdl-card__supporting-text">
+                        Total Tests : {{ curr_user.total_tests }}</br>
+                        Signatures Matched : {{ curr_user.sign_matched }}</br>
+                        Matching Percentage : {{ ((curr_user.sign_matched|float/curr_user.total_tests)*100)|round(3,'common') }}</br>
+                        Errors Reported : {{ curr_user.errors_reported }}</br>
+                        Error Percentage : {{ ((curr_user.errors_reported|float/curr_user.total_tests)*100)|round(3,'common') }}</br>
+                        Average Time Taken (seconds): {{ (curr_user.total_time_taken/curr_user.total_tests)|round(3,'common') }}</br>
+                    </div>
+                </div>
+              </div>
             </div>
+            {% endif %}
             <div class = "mdl-grid">
                 {% for test in all_tests %}
                     <div class="mdl-cell mdl-cell--4-col">
