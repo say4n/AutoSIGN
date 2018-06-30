@@ -323,6 +323,9 @@ limitations under the License
                                 <a id="report-{{ test.id }}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
                                     Report Error
                                 </a>
+                                <a id="delete-{{ test.id }}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">delete</i>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -418,6 +421,18 @@ limitations under the License
 
           dialog_{{test.id}}.close();
         });
+
+
+        delete-{{ test.id }}.addEventListener('click', function() {
+          var xhttp = new XMLHttpRequest();
+
+          console.log("Deleting test #{{ test.id }}")
+
+          xhttp.open("POST", "/delete_test", true);
+          xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+          xhttp.send("id=" + test_id);
+        });
+
     </script>
     {% endfor %}
 

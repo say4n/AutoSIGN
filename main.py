@@ -55,7 +55,7 @@ class User(db.Model, UserMixin):
     tests = db.relationship('Test', backref='Test', lazy='dynamic')
     total_tests = db.Column(db.Integer,default=0)
     sign_matched = db.Column(db.Integer,default=0)
-    errors_reported = db.Column(db.Integer,default=0)  
+    errors_reported = db.Column(db.Integer,default=0)
     total_time_taken = db.Column(db.Float,default=0.0)
 
 db_adapter = SQLAlchemyAdapter(db, User)
@@ -277,15 +277,29 @@ def flag_endpoint():
 
         err = Error(ref_test=test_id, comment=comment, flag=flag)
         db.session.add(err)
-        db.session.commit()
-
         current_user.errors_reported = current_user.errors_reported + 1
+
         db.session.commit()
 
         return jsonify({"success": True})
     except Exception as e:
         print(e)
         abort(400)
+
+
+@app.route("/delete_test", methods=["POST"])
+@login_required
+def delete_test():
+    try:
+        test_id = request.form.get("id")
+
+        db.session.query(Test).filter(Test.id == test_id).delete()
+        db.session.commit()
+
+        return jsonify({"success": True})
+    except Exception as e:
+        print(e)
+        return jsonify({"success": False})
 
 
 @app.route('/image/<path:filename>')
@@ -337,7 +351,7 @@ def verify():
         security_lvl = int(security_lvl)
 
         time_a = datetime.now()
-    
+
 
         dist, decision, same_percent, forg_percent, diff_percent = compare_signatures(signature_pathA,
                                                                                       signature_pathB,
