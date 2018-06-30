@@ -104,16 +104,24 @@ limitations under the License
               <div class="mdl-cell mdl-cell--12-col">
                 <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col">
                     <div class="mdl-card__title mdl-card--expand">
-                      <h4 class="mdl-card__title-text">Statistics</h4>
+                      <h4 class="mdl-card__title-text">Stats</h4>
                     </div>
 
-                    <div class="mdl-card__supporting-text">
-                        Total Tests : {{ curr_user.total_tests }}</br>
-                        Signatures Matched : {{ curr_user.sign_matched }}</br>
-                        Matching Percentage : {{ ((curr_user.sign_matched|float/curr_user.total_tests)*100)|round(3,'common') }}</br>
-                        Errors Reported : {{ curr_user.errors_reported }}</br>
-                        Error Percentage : {{ ((curr_user.errors_reported|float/curr_user.total_tests)*100)|round(3,'common') }}</br>
-                        Average Time Taken (seconds): {{ (curr_user.total_time_taken/curr_user.total_tests)|round(3,'common') }}</br>
+                    <div class="mdl-card__supporting-text mdl-grid">
+                      <div class="mdl-cell mdl-cell--6-col">
+                        Total Tests : {{ curr_user.total_tests }}
+
+                        Signatures Matched : {{ curr_user.sign_matched }}
+
+                        Matching Percentage : {{ ((curr_user.sign_matched|float/curr_user.total_tests)*100)|round(3,'common') }}
+                      </div>
+                      <div class="mdl-cell mdl-cell--6-col">
+                        Errors Reported : {{ curr_user.errors_reported }}
+
+                        Error Percentage : {{ ((curr_user.errors_reported|float/curr_user.total_tests)*100)|round(3,'common') }}
+
+                        Average Time Taken (seconds): {{ (curr_user.total_time_taken/curr_user.total_tests)|round(3,'common') }}
+                      </div>
                     </div>
                 </div>
               </div>
