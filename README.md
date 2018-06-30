@@ -1,5 +1,6 @@
 # AutoSIGN - Proof of Concept
 A Signature Validation and Mandate Verification System by using Siamese Networks and One-Shot Learning. 
+Head out to http://130.162.78.201 for our demo. :) 
 
 # Installation
 
@@ -25,6 +26,7 @@ The following libraries are required
 * libxext6
 * flask_user
 * flask_sqlalchemy
+* datetime
 
 They can be installed by running the following commands: 
 
@@ -65,15 +67,27 @@ unzip signet_models.zip
    * flask
    * flask_user
    * flask_sqlalchemy
+   * PIL
+   * flask_migrate
+   * datetime
 
   #### Functions
    * compare_signatures : Accepts paths to two images, computes the similarity between them
 
   #### API Routes
-   * /index: Landing page view
-   * /verify: Signature verification endpoint
-             accepts POST requests with payloads `uuid`,`signature_image` and `signature_gt_image`, the former being the   
-             unique identifier of the customer and the later two being either jpeg or png images (UUID may not be used here)
+   * /: Landing page view. This is also the Test page.
+   * /verify: Signature verification endpoint accepts POST requests with payloads `signature_image` and
+              `signature_gt_image`, they being either jpeg or png images. Then it passes those images through the system and
+              the results are stored in a new Test User. User statistics are also updated here.
+   * /dashboard: All the tests performed by the user is shown here. This also has error reporting system for the tests.
+   * /reports:  All the Error reports are listed in this page with every information of the test they refer to.
+   * /flag_report: This saves an error report to the Database in a Error class.
+  
+  #### Database Models
+   * User: Model to Store User Information
+   * Test: Model to Store Test Reports
+   * Error: Model to store Error Reports
+   
 
 ### tf_CNN.py
 
@@ -111,9 +125,10 @@ This File compares some results with the ones obtained by the us,to ensure consi
    * tesseract 
 
   #### Functions
-   * `preprocess_signature`: Uses the following three functions to pre-process the signature images into the fixed input size 
-                           of the CNN. This does all the centering, noise-removal and everything else that is necessary for 
-                           the Model to successfully learn from/process the signatures.
+   * `preprocess_signature`: Uses the following three functions to pre-process the signature images into the fixed input 
+                             size of the CNN. This does all the centering, noise-removal and everything else that is
+                             necessary for the Model to successfully learn from/process the signatures.
+                           
    * `Crop_center`,`resize_image` and `normalize_image`: 
 
 ### lasagne_to_tf.py
@@ -128,6 +143,21 @@ Filters as they are flipped with respect to each other.
 
 These functions implements those changes to load the pre-trained model we use as our baseline. 
 
+
+### templates/
+   #### Html Files
+   - base.html
+   - head.html
+   - drawer.html
+   - nav_header.html
+   - index.html
+   - dashboard.html
+   - result.html
+   - flags.html
+   
+### Database : autosign.db 
+ A sqlite3 database to store data according to our models.
+  
 
 ## Develop
 
@@ -150,5 +180,16 @@ Deploy using the provided Dockerfile!
 
 - Sayan Goswami
 - Ayan Sinha Mahaptra
-- Dibyadip Chatterjee
-- Arpan Bhowmik
+
+## Presentation Links
+  * Initial Pitch:
+        https://docs.google.com/presentation/d/1pbAOZM8xC0TRbq2eUiVT9vu5_wrmW_RgsaQg3pXNOcs/edit#slide=id.gd9c453428_0_16
+  * 4-Slide Gist:
+        https://docs.google.com/presentation/d/1RW9SC5ZtyvwlsXGoBjngLPIPRWyHzbXiDjoBz4Thjzc/edit#slide=id.g1f87997393_0_782
+  * End Product Presentation:
+        https://docs.google.com/presentation/d/1jgGh1k0kwmyMBOcpoPHd1lUIJ0UrtNFRtB6gUrQ0AT8/edit#slide=id.g3cbbbfc4a4_0_0
+  * Youtube Video Explanation:
+        https://www.youtube.com/watch?v=ryzBwsaE-pY&t=131s
+
+
+
