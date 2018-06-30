@@ -294,6 +294,8 @@ def delete_test():
         test_id = request.form.get("id")
 
         db.session.query(Test).filter(Test.id == test_id).delete()
+        current_user.total_tests = current_user.total_tests - 1
+
         db.session.commit()
 
         return jsonify({"success": True})
