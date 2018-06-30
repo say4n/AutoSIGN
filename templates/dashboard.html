@@ -107,7 +107,7 @@ limitations under the License
                       <h4 class="mdl-card__title-text">Stats</h4>
                     </div>
 
-                    <div class="mdl-card__supporting-text mdl-grid">
+                    <div class="mdl-grid">
                       <div class="mdl-cell mdl-cell--6-col">
                         <h6>Total Tests : {{ curr_user.total_tests }}</h6>
 
@@ -120,7 +120,7 @@ limitations under the License
 
                         <h6>Error Percentage : {{ ((curr_user.errors_reported|float/curr_user.total_tests)*100)|round(3,'common') }}</h6>
 
-                        <h6>Average Time Taken (seconds): {{ (curr_user.total_time_taken/curr_user.total_tests)|round(3,'common') }}</h6>
+                        <h6>Average Time Taken : {{ (curr_user.total_time_taken/curr_user.total_tests)|round(3,'common') }} seconds</h6>
                       </div>
                     </div>
                 </div>
