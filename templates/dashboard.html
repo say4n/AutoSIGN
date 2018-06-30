@@ -88,6 +88,40 @@ limitations under the License
       transform: translate(0, -50%);
     }
     </style>
+
+
+    <style>
+    @import url(https://fonts.googleapis.com/css?family=Montserrat:400);
+
+    .chart-text {
+      font: 16px/1.4em "Montserrat", Arial, sans-serif;
+      fill: #000;
+      -moz-transform: translateY(0.25em);
+      -ms-transform: translateY(0.25em);
+      -webkit-transform: translateY(0.25em);
+      transform: translateY(0.25em);
+    }
+
+    .chart-number {
+      font-size: 0.6em;
+      line-height: 1;
+      text-anchor: middle;
+      -moz-transform: translateY(-0.25em);
+      -ms-transform: translateY(-0.25em);
+      -webkit-transform: translateY(-0.25em);
+      transform: translateY(-0.25em);
+    }
+
+    .chart-label {
+      font-size: 0.2em;
+      text-transform: uppercase;
+      text-anchor: middle;
+      -moz-transform: translateY(0.7em);
+      -ms-transform: translateY(0.7em);
+      -webkit-transform: translateY(0.7em);
+      transform: translateY(0.7em);
+    }
+    </style>
 </head>
 
 <body>
@@ -108,7 +142,7 @@ limitations under the License
                     </div>
 
                     <div class="mdl-grid">
-                      <div class="mdl-cell mdl-cell--6-col">
+                      <!-- <div class="mdl-cell mdl-cell--6-col">
                         <h6>Total Tests : {{ curr_user.total_tests }}</h6>
 
                         <h6>Signatures Matched : {{ curr_user.sign_matched }}</h6>
@@ -121,7 +155,51 @@ limitations under the License
                         <h6>Error Percentage : {{ ((curr_user.errors_reported|float/curr_user.total_tests)*100)|round(3,'common') }}</h6>
 
                         <h6>Average Time Taken : {{ (curr_user.total_time_taken/curr_user.total_tests)|round(3,'common') }} seconds</h6>
+                      </div> -->
+
+                      <div class="mdl-cell mdl-cell--6-col">
+                        <!-- Stats -->
+                        <svg width="100%" height="100%" viewBox="0 0 42 42" class="donut">
+                          <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
+                          <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#d2d3d4" stroke-width="4"></circle>
+
+                          <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#34bf49" stroke-width="4" stroke-dasharray="{{ ((curr_user.sign_matched|float/curr_user.total_tests)*100)|round(3,'common') }} {{ 100 - ((curr_user.sign_matched|float/curr_user.total_tests)*100)|round(3,'common') }}" stroke-dashoffset="75"></circle>
+
+                          <g class="chart-text">
+                            <text x="50%" y="50%" class="chart-number">
+                              {{ curr_user.total_tests }}
+                            </text>
+                            <text x="50%" y="50%" class="chart-label">
+                              Tests
+                            </text>
+                          </g>
+                        </svg>
                       </div>
+
+                      <div class="mdl-cell mdl-cell--6-col">
+                        <!-- Reports -->
+                        <svg width="100%" height="100%" viewBox="0 0 42 42" class="donut">
+                          <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff"></circle>
+                          <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#d2d3d4" stroke-width="4"></circle>
+
+                          <circle class="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#0099e5" stroke-width="4" stroke-dasharray="{{ ((curr_user.errors_reported|float/curr_user.total_tests)*100)|round(3,'common') }} {{ 100 - ((curr_user.errors_reported|float/curr_user.total_tests)*100)|round(3,'common') }}" stroke-dashoffset="75"></circle>
+
+                          <g class="chart-text">
+                            <text x="50%" y="50%" class="chart-number">
+                              {{ curr_user.errors_reported }}
+                            </text>
+                            <text x="50%" y="50%" class="chart-label">
+                              Reports
+                            </text>
+                          </g>
+                        </svg>
+                      </div>
+
+                      <div class="mdl-cell mdl-cell--12-col">
+                        <!-- Raw Stats -->
+                        More debug info goes here!
+                      </div>
+
                     </div>
                 </div>
               </div>
