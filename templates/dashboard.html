@@ -109,18 +109,18 @@ limitations under the License
 
                     <div class="mdl-card__supporting-text mdl-grid">
                       <div class="mdl-cell mdl-cell--6-col">
-                        Total Tests : {{ curr_user.total_tests }}
+                        <h6>Total Tests : {{ curr_user.total_tests }}</h6>
 
-                        Signatures Matched : {{ curr_user.sign_matched }}
+                        <h6>Signatures Matched : {{ curr_user.sign_matched }}</h6>
 
-                        Matching Percentage : {{ ((curr_user.sign_matched|float/curr_user.total_tests)*100)|round(3,'common') }}
+                        <h6>Matching Percentage : {{ ((curr_user.sign_matched|float/curr_user.total_tests)*100)|round(3,'common') }}</h6>
                       </div>
                       <div class="mdl-cell mdl-cell--6-col">
-                        Errors Reported : {{ curr_user.errors_reported }}
+                        <h6>Errors Reported : {{ curr_user.errors_reported }}</h6>
 
-                        Error Percentage : {{ ((curr_user.errors_reported|float/curr_user.total_tests)*100)|round(3,'common') }}
+                        <h6>Error Percentage : {{ ((curr_user.errors_reported|float/curr_user.total_tests)*100)|round(3,'common') }}</h6>
 
-                        Average Time Taken (seconds): {{ (curr_user.total_time_taken/curr_user.total_tests)|round(3,'common') }}
+                        <h6>Average Time Taken (seconds): {{ (curr_user.total_time_taken/curr_user.total_tests)|round(3,'common') }}</h6>
                       </div>
                     </div>
                 </div>
